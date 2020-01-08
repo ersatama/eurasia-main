@@ -1,0 +1,228 @@
+@import "font/stylesheet.css";
+
+.sign-right {
+    background-color:#f9f5ee
+}
+
+h4 {
+    font-family:PT Root UI Web,Tahoma,serif;
+    font-weight:700;
+    margin-bottom:45px
+}
+
+p {
+    color:#2a2a2a;
+    font-family:"PT Root UI Web",serif;
+    font-size:16px;
+    font-weight:500
+}
+
+::placeholder {
+    color:#afafaf;
+    opacity:1
+}
+
+:-ms-input-placeholder {
+    color:#afafaf
+}
+
+::-ms-input-placeholder {
+    color:#afafaf
+}
+
+.sign-passLos {
+    color:#2a2a2a;
+    font-family:"PT Root UI Web",serif;
+    font-size:16px;
+    font-weight:400;
+    text-decoration:underline;
+    text-align:end;
+}
+
+.register p {
+    color:#000;
+    font-family:"PT Root UI Web",serif;
+    font-size:16px;
+    font-weight:700;
+    line-height:20px;
+    margin-bottom:5px
+}
+
+.register span {
+    color:#2a2a2a;
+    font-family:"PT Root UI Web",serif;
+    font-size:14px;
+    font-weight:600;
+    line-height:18px
+}
+
+.register .form-control {
+    border:1px solid #ddd
+}
+
+.register_colored {
+    width: 100%;
+    background-color:#f9f5ee
+}
+
+.register-address {
+    color: #3faa4c !important;
+    font-size: 24px !important;
+    font-weight: 700 !important;
+}
+
+.btn_a {
+    padding: 10px 20px;
+}
+.btn_d {
+    padding:10px 20px;
+    background-image:linear-gradient(to top,#d4191d 0%,#e01a1e 53%,#d4191d 100%);
+    border-radius:3px;
+    color:#fff
+}
+
+.btn_d:hover {
+    background-image:linear-gradient(to top,#d4191d 0%,#e01a1e 53%,#d4191d 100%);
+    box-shadow:0 0 20px 0 #d03f3f8a;
+    border-radius:3px;
+    color:#fff
+}
+
+.radio input {
+    position:absolute;
+    z-index:-1;
+    opacity:0;
+    margin:10px 0 0 7px
+}
+
+.radio__text {
+    position:relative;
+    padding:0 0 0 25px;
+    cursor:pointer
+}
+
+.radio__text:before {
+    content:'';
+    position:absolute;
+    top:0;
+    left:0;
+    width:16px;
+    height:16px;
+    border:1px solid #CDD1DA;
+    border-radius:50%;
+    background:#FFF
+}
+
+.radio__text:after {
+    content:'';
+    position:absolute;
+    top:4px;
+    left:4px;
+    width:8px;
+    height:8px;
+    border-radius:50%;
+    background:#9FD468;
+    box-shadow:inset 0 1px 1px rgba(0,0,0,.5);
+    opacity:0;
+    transition:.2s
+}
+
+.radio input:checked + .radio__text:after {
+    opacity:1
+}
+
+::placeholder {
+    color:#afafaf;
+    opacity:1
+}
+
+:-ms-input-placeholder {
+    color:#afafaf
+}
+
+::-ms-input-placeholder {
+    color:#afafaf
+}
+
+.sign-passLos {
+    color:#2a2a2a;
+    font-family: "PT Root UI Web", serif;
+    font-size:16px;
+    font-weight:400;
+    text-decoration:underline;
+    text-align:end
+}
+
+.sign-passLos {
+    color:#2a2a2a;
+    font-family:"PT Root UI Web", serif;
+    font-size:16px;
+    font-weight:400
+}
+
+.sign-checkbox {
+    height:20px;
+    margin-right:8px
+}
+
+.header__phone{
+    font-size: 0.9rem;
+    line-height: 39px;
+}
+
+/*modal*/
+.modal-container{
+    display: none;
+    top: 0;
+    left: 0;
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0,3,6,.9);
+    z-index: 900;
+}
+.modal-container-content{
+    width: 420px;
+    height: 150px;
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 32px;
+    font-family: "PT Root UI Web",serif !important;
+    position: absolute;
+    left: calc(50% - 210px);
+    top: calc(50% - 75px);
+    text-align: center;
+}
+.check-ico{
+    margin: auto;
+    margin-bottom: 10px;
+    width: 30px;
+    height: 30px;
+}
+.modal-close{
+    position: absolute;
+    top: 0;
+    right: -50px;
+    width: 26px;
+    cursor: pointer;
+}
+@media (max-width: 480px) {
+    .modal-container-content {
+        width: 350px;
+        font-size: 23px;
+        left: calc(50% - 175px);
+    }
+    .modal-close{
+        right: 0;
+    }
+}
+@media (max-width: 330px) {
+    .modal-container-content {
+        width: 280px;
+        font-size: 22px;
+        left: calc(50% - 140px);
+    }
+    .modal-close{
+        right: 0;
+    }
+}

@@ -11,10 +11,15 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
+//Route::get('/',['uses'=>'HomeController@index','as'=>'Main Page']);
+
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/', 'MainController@index')->name('main');
+Route::get('/register', 'MainController@register')->name('main');
+/*Route::group(['middleware' => ['auth']], function () {
+    Route::get('/', 'MainController@index')->name('welcome');
+});*/
