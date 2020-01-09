@@ -25,6 +25,7 @@ $(document).ready(function () {
             success: function (response) {
                 modalContainer.fadeIn(300);
                 alert(response);
+                console.log(response);
                 // console.log(response);
                 if (response == 'success') {
                     setTimeout("location = \"https://ost.eurasia-life.com/\";", 3000);
