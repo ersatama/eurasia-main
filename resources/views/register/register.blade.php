@@ -2,7 +2,8 @@
 @section('content')
     @include('layouts.modal.success')
     <div class="page-content">
-        <form action="../processing/send.php" id="registerForm" method="post">
+        <form id="registerForm" method="post">
+            @csrf
             <div class="register">
                 <div class="container">
                     <div class="row">

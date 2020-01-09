@@ -16,7 +16,7 @@ $(document).ready(function () {
         closeBtn = $(".modal-close"),
         modalContainer = $(".modal-container");
 
-    form.submit(function () {
+    form.submit(function (event) {
         event.preventDefault();
         $.ajax({
             type: "POST",
@@ -24,8 +24,9 @@ $(document).ready(function () {
             data: form.serialize(),
             success: function (response) {
                 modalContainer.fadeIn(300);
+                alert(response);
                 // console.log(response);
-                if (response == 'succes') {
+                if (response == 'success') {
                     setTimeout("location = \"https://ost.eurasia-life.com/\";", 3000);
                 } else {
                     $(".modal-container-content .row").text('Ошибка при отправке, попробуйте еще раз');

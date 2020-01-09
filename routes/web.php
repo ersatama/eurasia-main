@@ -20,6 +20,8 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/', 'MainController@index')->name('main');
 Route::get('/register', 'MainController@register')->name('main');
+
+Route::post('/register', 'MainController@save');
 /*Route::group(['middleware' => ['auth']], function () {
     Route::get('/', 'MainController@index')->name('welcome');
 });*/
