@@ -18,6 +18,19 @@
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+
+//Insurance List
+Route::get('/employee_insurance','insuranceController@employee')->name('Employee Care');
+Route::get('/annuity_insurance','insuranceController@annuity')->name('Annuity Insurance');
+Route::get('/life_insurance','insuranceController@life')->name('Life Insurance');
+Route::get('/travel_insurance','insuranceController@travel')->name('Travel Insurance');
+
+//Footer
+Route::get('/news','newsController@index')->name('News');
+Route::get('/about','aboutController@index')->name('About');
+Route::get('/audit','auditController@index')->name('Audit');
+
 Route::get('/', 'MainController@index')->name('main');
 Route::get('/register', 'MainController@register')->name('main');
 
