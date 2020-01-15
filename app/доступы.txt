@@ -1,0 +1,18 @@
+сайт
+https://eurasia-life.com/
+
+
+доступ к админке
+http://admin.eurasia-life.com/site/login
+--------------------------------------------------------------------------------------
+Логин:  yuriy.dolgov@theeurasia.kz
+Пароль:              yuriy.dolgov@theeurasia.kz
+
+
+
+
+
+
+https://srv-plesk05.ps.kz:8443/
+eurasi21
+NeLC47BmSE4m
