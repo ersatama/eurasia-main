@@ -1,5 +1,4 @@
-@extends('layouts.app')
-
+@extends('layouts.mainApp')
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
@@ -13,7 +12,7 @@
 
                         <input type="hidden" name="token" value="{{ $token }}">
 
-                        <div class="form-group row">
+                        <div class="form-group row" onselectstart="return false;">
                             <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
 
                             <div class="col-md-6">

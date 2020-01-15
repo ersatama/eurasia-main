@@ -75,6 +75,7 @@
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
     <!-- Styles -->
@@ -135,8 +136,8 @@
                         </a>
                     </li>
                     <li class="main-nav__item" itemprop="name">
-                        <a href="/login" class="main-nav__link" itemprop="url">
-                            <span class="main-nav__title">Личный кабинет</span>
+                        <a href="/login">
+                            <div class="main-nav__title" style="position: absolute; top: 50%; transform: translateY(-50%);">Личный кабинет</div>
                         </a>
                     </li>
                 </ul>
