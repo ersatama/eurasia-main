@@ -32,7 +32,7 @@ Route::get('/about','aboutController@index')->name('About');
 Route::get('/audit','auditController@index')->name('Audit');
 
 Route::get('/', 'MainController@index')->name('main');
-Route::get('/register', 'MainController@register')->name('main');
+//Route::get('/register', 'MainController@register')->name('main');
 
 Route::post('/register', 'MainController@save');
 /*Route::group(['middleware' => ['auth']], function () {

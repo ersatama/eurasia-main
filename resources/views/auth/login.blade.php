@@ -32,20 +32,23 @@
                             <label class="custom-control-label col-form-label login-remember" for="remember">{{ __('Remember Me') }}</label>
                         </div>
                     </div>
-                    <div class="form-group row mb-0">
-                        <div class="col-md-8 offset-md-4">
-                            <button type="submit" class="btn btn-primary">
+                    <div class="form-group">
+                            <button type="submit" class="btn btn-primary btn-login">
                                 {{ __('Login') }}
                             </button>
-
-                            @if (Route::has('password.request'))
-                                <a class="btn btn-link" href="{{ route('password.request') }}">
-                                    {{ __('Forgot Your Password?') }}
-                                </a>
-                            @endif
-                        </div>
+                            <a class="login-reset" href="{{ route('password.request') }}">
+                                {{ __('Forgot Your Password?') }}
+                            </a>
+                            
                     </div>
                 </form>
+                <div class="form-group" style="margin: 0;">
+                    <a href="/register">
+                        <button type="submit" class="btn btn-info btn-login btn-register">
+                            {{ __('Register') }}
+                        </button>
+                    </a>
+                </div>
             </div>
         </div>
     </div>
