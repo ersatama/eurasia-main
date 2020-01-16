@@ -23,4 +23,13 @@ class InsuranceController extends Controller
     public function travel() {
         return view('insurance.travel');
     }
+
+    public function register(array $data)
+    {
+        return 'hello world';
+    }
+    public function hello() {
+        return 'hello world!!!!';
+    }
+
 }

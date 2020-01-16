@@ -1,5 +1,14 @@
 <?php
 return [
+    'login' => 'Логин',
+    'register' => 'Регистрация',
+    'phone_or_iin' => 'Телефон или ИИН',
+    'confirm_password' => 'Подтвердите пароль',
+    'password' => 'Пароль',
+    'name' => 'Имя',
+    'surname' => 'Фамилия',
+    'lastname' => 'Отчество',
+    'iin' => 'ИИН',
     'employees_insurance_against_accidents' => 'Страхование работников от несчастных случаев',
     'annuity_insurance' => 'Аннуитетное страхование',
     'life_insurance' => 'Страхование жизни',

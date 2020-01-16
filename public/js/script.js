@@ -1,7 +1,7 @@
 $(document).ready(function () {
     jQuery(function ($) {
         // $(".date").mask("99.99.9999");
-        $(".phone").mask("+7(999) 999-9999");
+        $(".phone, #phone").mask("+7(999) 999-9999");
     });
 
     jQuery.datetimepicker.setLocale('ru');

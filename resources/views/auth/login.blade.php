@@ -9,9 +9,8 @@
                 <form method="POST" action="{{ route('login') }}">
                     @csrf
                     <div class="form-group">
-                        <input id="phone" type="text" class="form-control @error('email') is-invalid @enderror login-input" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
-
-                        @error('email')
+                        <input id="phone" type="text" class="form-control @error('phone') is-invalid @enderror login-input" name="phone" value="{{ old('phone') }}" required autocomplete="phone" autofocus placeholder="{{__('main.phone_number')}}">
+                        @error('phone')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
@@ -39,7 +38,7 @@
                             <a class="login-reset" href="{{ route('password.request') }}">
                                 {{ __('Forgot Your Password?') }}
                             </a>
-                            
+
                     </div>
                 </form>
                 <div class="form-group" style="margin: 0;">

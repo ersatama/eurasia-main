@@ -16,10 +16,12 @@
 
 
 Auth::routes();
+Route::get('logout', 'Auth\LoginController@logout');
 
+Route::post('/hello', 'insuranceController@hello')->name('hello');
 Route::get('/home', 'HomeController@index')->name('home');
 
-
+//Route::post('/register', 'insuranceController@register')->name('Registration');
 //Insurance List
 Route::get('/employee_insurance','insuranceController@employee')->name('Employee Care');
 Route::get('/annuity_insurance','insuranceController@annuity')->name('Annuity Insurance');
@@ -34,7 +36,7 @@ Route::get('/audit','auditController@index')->name('Audit');
 Route::get('/', 'MainController@index')->name('main');
 //Route::get('/register', 'MainController@register')->name('main');
 
-Route::post('/register', 'MainController@save');
+/*Route::post('/register', 'MainController@save');*/
 /*Route::group(['middleware' => ['auth']], function () {
     Route::get('/', 'MainController@index')->name('welcome');
 });*/

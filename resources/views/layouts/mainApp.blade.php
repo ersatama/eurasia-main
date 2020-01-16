@@ -232,6 +232,9 @@
 </footer>
 @yield('styles')
 <script src="{{ asset('js/vendor.js?v=1567666965') }}" defer></script>
+<script src="{{ asset('js/jquery-3.4.1.min.js') }}" defer></script>
+<script src="{{ asset('js/jquery.maskedinput.js') }}" defer></script>
+<script src="{{ asset('js/jquery.datetimepicker.full.min.js') }}" defer></script>
 <script src="{{ asset('js/app.js?v=1567666964') }}" defer></script>
 @yield('scripts')
 </body>
