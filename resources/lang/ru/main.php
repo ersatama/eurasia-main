@@ -1,9 +1,13 @@
 <?php
 return [
+    'save' => 'Сохранить',
+    'email' => 'Эл. почта',
     'login' => 'Логин',
     'register' => 'Регистрация',
     'phone_or_iin' => 'Телефон или ИИН',
     'confirm_password' => 'Подтвердите пароль',
+    'old_password' => 'старый пароль',
+    'new_password' => 'новый пароль',
     'password' => 'Пароль',
     'name' => 'Имя',
     'surname' => 'Фамилия',
