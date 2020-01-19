@@ -78,5 +78,5 @@
 </div>
 @endsection
 @section('scripts')
-    <script src="{{asset('js/register.js')}}" defer></script>
+    <script src="{{asset('js/form.js')}}" defer></script>
 @endsection

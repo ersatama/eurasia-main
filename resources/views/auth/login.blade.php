@@ -53,3 +53,6 @@
     </div>
 </div>
 @endsection
+@section('scripts')
+    <script src="{{asset('js/form.js')}}" defer></script>
+@endsection

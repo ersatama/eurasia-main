@@ -3,17 +3,19 @@
 
 namespace App\Repositories\Password;
 
+use App\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class PasswordRepositoryEloquent implements PasswordRepositoryInterface
 {
     final public function set(array $data): array {
-        $password = Auth::user()->password;
-        if (Hash::check($data['old'], $password)) {
 
-            return ['alert-success','Пароль успешно изменен'];
-        }
-        return ['alert-danger','Не правильный пароль!'];
+    	$user = User::where('id', Auth::id())->first();
+    	$user->password = Hash::make($data['new']);
+    	$user->save();
+        $password = Auth::user()->password;
+
+        return ['alert-success','Пароль успешно изменен'];
     }
 }

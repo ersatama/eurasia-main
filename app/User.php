@@ -36,4 +36,19 @@ class User extends Authenticatable
     protected $casts = [
         'phone_verified_at' => 'datetime',
     ];
+
+    public function setNameAttribute($value)
+    {
+        $this->attributes['name'] = ucfirst(strtolower($value));
+    }
+
+    public function setSurnameAttribute($value)
+    {
+        $this->attributes['surname'] = ucfirst(strtolower($value));
+    }
+
+    public function setLastnameAttribute($value)
+    {
+        $this->attributes['lastname'] = ucfirst(strtolower($value));
+    }
 }
