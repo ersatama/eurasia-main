@@ -50,9 +50,9 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255', 'regex:/(^([a-zA-z]+)$)/u'],
-            'surname' => ['required', 'string', 'max:255', 'regex:/(^([a-zA-z]+)$)/u'],
-            'lastname' => ['nullable', 'max:255', 'regex:/(^([a-zA-z]+)$)/u'],
+            'name' => ['required', 'string', 'max:255', 'regex:/(^([a-zA-ZА-ЯЦцУуШшЩщФфЫыРрЭэЧчТтЬьЮюЪъХхЁа-яё]+)$)/u'],
+            'surname' => ['required', 'string', 'max:255', 'regex:/(^([a-zA-ZА-ЯЦцУуШшЩщФфЫыРрЭэЧчТтЬьЮюЪъХхЁа-яё]+)$)/u'],
+            'lastname' => ['nullable', 'string', 'max:255', 'regex:/(^([a-zA-ZА-ЯЦцУуШшЩщФфЫыРрЭэЧчТтЬьЮюЪъХхЁа-яё]+)$)/u'],
             'iin' => ['required', 'string', 'min:12', 'max:12', 'unique:users', 'regex:/^\d+$/u'],
             'phone' => ['required', 'string', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
@@ -67,8 +67,9 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+
         return User::create([
-            'name' => $data['name'],
+            'name' => mb_convert_encoding($data['name'], 'UTF-8'),
             'surname' => $data['surname'],
             'lastname' => $data['lastname'],
             'iin' => $data['iin'],

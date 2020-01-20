@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Repositories\Password\PasswordRepositoryEloquent;
 use App\Http\Requests\ChangePassword;
-use Illuminate\Hashing\BcryptHasher;
 
 class CabinetController extends Controller
 {
@@ -16,12 +15,12 @@ class CabinetController extends Controller
         $this->password = $password;
     }
 
-    public function userCabinet()
+    public function edit()
     {
         return view('user.cabinet.cabinet');
     }
 
-    public function userCabinetSave(ChangePassword $request)
+    public function store(ChangePassword $request)
     {
         $password = $this->password->set($request->all());
         return view('user.cabinet.cabinet', ['password' => $password]);

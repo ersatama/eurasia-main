@@ -13,19 +13,34 @@
                 <div class="form-group row">
                     <label for="name" class="col-sm-2 col-form-label">{{__('main.name')}}</label>
                     <div class="col-sm-5">
-                        <input type="text" value="{{Auth::user()->name}}" class="form-control login-input" id="name" name="name" required>
+                        <input type="text" value="{{Auth::user()->name}}" class="form-control login-input @error('name') is-invalid @enderror" id="name" name="name" required>
+                        @error('name')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="surname" class="col-sm-2 col-form-label">{{__('main.surname')}}</label>
                     <div class="col-sm-5">
-                        <input type="text" value="{{Auth::user()->surname}}" class="form-control login-input" id="surname">
+                        <input type="text" value="{{Auth::user()->surname}}" class="form-control login-input @error('surname') is-invalid @enderror" name="surname" required>
+                        @error('surname')
+                        <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="lastname" class="col-sm-2 col-form-label">{{__('main.lastname')}}</label>
                     <div class="col-sm-5">
-                        <input type="text" value="{{Auth::user()->lastname}}" class="form-control login-input" id="lastname">
+                        <input type="text" value="{{Auth::user()->lastname}}" class="form-control login-input @error('lastname') is-invalid @enderror" name="lastname">
+                        @error('lastname')
+                        <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
                 </div>
                 <div class="form-group row">
@@ -40,13 +55,18 @@
                 <div class="form-group row">
                     <label for="iin" class="col-sm-2 col-form-label">{{__('main.phone_number')}}</label>
                     <div class="col-sm-5">
-                        <input type="text" value="{{Auth::user()->phone}}" class="form-control login-input" id="iin">
+                        <input type="text" value="{{Auth::user()->phone}}" class="form-control login-input" readonly>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="inputEmail3" class="col-sm-2 col-form-label">{{__('main.email')}}</label>
                     <div class="col-sm-5">
-                        <input type="text" value="{{Auth::user()->email}}" class="form-control login-input" id="inputEmail3">
+                        <input type="email" value="{{Auth::user()->email}}" class="form-control login-input @error('email') is-invalid @enderror" name="email" autocomplete="email" @if(Auth::user()->email) readonly @endif>
+                        @error('email')
+                        <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
                 </div>
                 <br>

@@ -137,7 +137,16 @@
                     </li>
                     <li class="main-nav__item" itemprop="name">
                         <a href="/login">
-                            <div class="main-nav__title" style="position: absolute; top: 50%; transform: translateY(-50%);">Личный кабинет</div>
+                            @if(Auth::check())
+                                <div></div>
+                                <div class="main-nav__title" style="position: absolute; top: 50%; transform: translateY(-50%);">
+                                    <div class="">{{Auth::user()->name}} {{Auth::user()->surname}} {{Auth::user()->lastname}}</div>
+                                    <div class="">{{Auth::user()->name}} {{Auth::user()->surname}} {{Auth::user()->lastname}}</div>
+                                    <div class="">{{Auth::user()->name}} {{Auth::user()->surname}} {{Auth::user()->lastname}}</div>
+                                </div>
+                            @else
+                                <div class="main-nav__title" style="position: absolute; top: 50%; transform: translateY(-50%);">Личный кабинет</div>
+                            @endif
                         </a>
                     </li>
                 </ul>
@@ -148,7 +157,7 @@
                         <a class="header__phone" href="tel:88000800099">8 800 080-00-99</a>
                     </div>
                     <div>
-                        <a class="btn btn_c btn-sm" href="#callback" data-toggle="modal" data-target="#callback">{{__('main.call_back')}}</a>                                   </div>
+                        <a class="btn btn_c btn-sm" href="#callback" data-toggle="modal" data-target="#callback">{{__('main.call_back')}}</a>                                </div>
                 </div>
             </div>
         </div>

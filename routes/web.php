@@ -23,10 +23,11 @@ Route::post('/hello', 'insuranceController@hello')->name('hello');
 //log in page
 Route::group(['middleware' => ['auth']], function() {
     Route::get('/home', 'HomeController@index')->name('home');
-//    Route::get('/home', 'HomeController@index')->name('home');
-    Route::get('/edit', 'EditController@userEdit')->name('edit');
-    Route::get('/cabinet', 'CabinetController@userCabinet')->name('cabinet');
-    Route::post('/cabinet', 'CabinetController@userCabinetSave');
+    Route::get('/my_insurance', 'insuranceController@list')->name('home');
+    Route::get('/edit', 'EditController@edit')->name('edit');
+    Route::post('/edit', 'EditController@store');
+    Route::get('/cabinet', 'CabinetController@edit')->name('cabinet');
+    Route::post('/cabinet', 'CabinetController@store');
 });
 
 //Route::post('/register', 'insuranceController@register')->name('Registration');

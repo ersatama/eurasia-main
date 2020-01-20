@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 class InsuranceController extends Controller
 {
 
+    public function list() {
+        return view('user.insurance.myInsurance');
+    }
 
     public function life() {
         return view('insurance.life');

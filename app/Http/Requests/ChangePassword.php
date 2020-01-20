@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Hash;
+
 class ChangePassword extends FormRequest
 {
     /**
@@ -42,11 +43,11 @@ class ChangePassword extends FormRequest
         return;
     }
 
-    public function message()
+    /*public function message()
     {
       return [
         'new.required' => 'A color is required',
         'confirm.required' => 'An image is required'
       ];
-    }
+    }*/
 }
