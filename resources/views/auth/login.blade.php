@@ -1,9 +1,8 @@
 @extends('layouts.mainApp')
-
 @section('content')
 <div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-4 login">
+    <div class="row justify-content-center login">
+        <div class="col-md-4">
             <div class="login-header">Вход в личный кабинет</div>
             <div class="card-body">
                 <form method="POST" action="{{ route('login') }}">
@@ -32,7 +31,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                            <button type="submit" class="btn btn-primary btn-login">
+                            <button type="submit" class="btn btn-success btn-login">
                                 {{ __('Login') }}
                             </button>
                             <a class="login-reset" href="{{ route('password.request') }}">

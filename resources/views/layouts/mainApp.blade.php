@@ -138,24 +138,45 @@
                     </li>
                     <li class="main-nav__item" itemprop="name">
                         @if(Auth::check())
-                            <div class="main-nav__title-login">
+                            @if (Auth::user()->status === 'user')
+                                <div class="main-nav__title-login">
                                     <div class="main-nav__title-login__left">
                                         <a href="/messages">
                                             <i class="fa fa-envelope" aria-hidden="true"></i>
                                         </a>
                                     </div>
-                                <div class="main-nav__title-login__right">
-                                    <a href="/edit">
-                                        <div class="main-nav__title-login__name">{{Auth::user()->name}} {{Auth::user()->surname}} {{Auth::user()->lastname}}</div>
-                                    </a>
-                                    <a href="/home">
-                                        <div class="main-nav__title-login__item">Заявить страховой случай</div>
-                                    </a>
-                                    <a href="/my_insurance">
-                                        <div class="main-nav__title-login__item">Мои договоры</div>
-                                    </a>
+                                    <div class="main-nav__title-login__right">
+                                        <a href="/edit">
+                                            <div class="main-nav__title-login__name">{{Auth::user()->name}} {{Auth::user()->surname}} {{Auth::user()->lastname}}</div>
+                                        </a>
+                                        <a href="/home">
+                                            <div class="main-nav__title-login__item">Заявить страховой случай</div>
+                                        </a>
+                                        <a href="/my_insurance">
+                                            <div class="main-nav__title-login__item">Мои договоры</div>
+                                        </a>
+                                    </div>
                                 </div>
-                            </div>
+                            @else
+                                <div class="main-nav__title-login">
+                                    <div class="main-nav__title-login__left">
+                                        <a href="/messages">
+                                            <i class="fa fa-envelope" aria-hidden="true"></i>
+                                        </a>
+                                    </div>
+                                    <div class="main-nav__title-login__right">
+                                        <a href="/edit">
+                                            <div class="main-nav__title-login__name">{{Auth::user()->name}} {{Auth::user()->surname}} {{Auth::user()->lastname}}</div>
+                                        </a>
+                                        <a href="/home">
+                                            <div class="main-nav__title-login__item">Статистика</div>
+                                        </a>
+                                        <a href="/my_insurance">
+                                            <div class="main-nav__title-login__item">Все договоры</div>
+                                        </a>
+                                    </div>
+                                </div>
+                            @endif
                         @else
                         <a href="/login">
                             <div class="main-nav__title" style="position: absolute; top: 50%; transform: translateY(-50%);">Личный кабинет</div>
