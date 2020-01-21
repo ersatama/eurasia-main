@@ -71,7 +71,7 @@
 <!--<script src="{{ asset('js/jquery-3.4.1.min.js') }}" defer></script>
     <script src="{{ asset('js/jquery.maskedinput.js') }}" defer></script>
     <script src="{{ asset('js/jquery.datetimepicker.full.min.js') }}" defer></script>-->
-
+    <script src="https://use.fontawesome.com/4318ac312d.js"></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -81,6 +81,7 @@
     <!-- Styles -->
     <link href="{{ asset('css/styles.css') }}" rel="stylesheet">
     <style>.landing-page-list__link_1 { background-image: url("/img/001.jpg") }.landing-page-list__link_2 { background-image: url("/img/002.jpg") }.landing-page-list__link_3 { background-image: url("/img/003.jpg") }.landing-page-list__link_13 { background-image: url("/img/005.jpg") }</style>
+    @yield('styles')
 </head>
 <body>
 <header class="header">
@@ -136,18 +137,30 @@
                         </a>
                     </li>
                     <li class="main-nav__item" itemprop="name">
-                        <a href="/login">
-                            @if(Auth::check())
-                                <div></div>
-                                <div class="main-nav__title" style="position: absolute; top: 50%; transform: translateY(-50%);">
-                                    <div class="">{{Auth::user()->name}} {{Auth::user()->surname}} {{Auth::user()->lastname}}</div>
-                                    <div class="">{{Auth::user()->name}} {{Auth::user()->surname}} {{Auth::user()->lastname}}</div>
-                                    <div class="">{{Auth::user()->name}} {{Auth::user()->surname}} {{Auth::user()->lastname}}</div>
+                        @if(Auth::check())
+                            <div class="main-nav__title-login">
+                                    <div class="main-nav__title-login__left">
+                                        <a href="/messages">
+                                            <i class="fa fa-envelope" aria-hidden="true"></i>
+                                        </a>
+                                    </div>
+                                <div class="main-nav__title-login__right">
+                                    <a href="/edit">
+                                        <div class="main-nav__title-login__name">{{Auth::user()->name}} {{Auth::user()->surname}} {{Auth::user()->lastname}}</div>
+                                    </a>
+                                    <a href="/home">
+                                        <div class="main-nav__title-login__item">Заявить страховой случай</div>
+                                    </a>
+                                    <a href="/my_insurance">
+                                        <div class="main-nav__title-login__item">Мои договоры</div>
+                                    </a>
                                 </div>
-                            @else
-                                <div class="main-nav__title" style="position: absolute; top: 50%; transform: translateY(-50%);">Личный кабинет</div>
-                            @endif
+                            </div>
+                        @else
+                        <a href="/login">
+                            <div class="main-nav__title" style="position: absolute; top: 50%; transform: translateY(-50%);">Личный кабинет</div>
                         </a>
+                        @endif
                     </li>
                 </ul>
             </nav>
@@ -239,7 +252,7 @@
         </div>
     </div>
 </footer>
-@yield('styles')
+
 <script src="{{ asset('js/vendor.js?v=1567666965') }}" defer></script>
 <script src="{{ asset('js/jquery-3.4.1.min.js') }}" defer></script>
 <script src="{{ asset('js/jquery.maskedinput.js') }}" defer></script>

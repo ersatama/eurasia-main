@@ -23,6 +23,7 @@ Route::post('/hello', 'insuranceController@hello')->name('hello');
 //log in page
 Route::group(['middleware' => ['auth']], function() {
     Route::get('/home', 'HomeController@index')->name('home');
+    Route::get('/messages', 'MessageController@index')->name('home');
     Route::get('/my_insurance', 'insuranceController@list')->name('home');
     Route::get('/edit', 'EditController@edit')->name('edit');
     Route::post('/edit', 'EditController@store');

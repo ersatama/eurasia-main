@@ -12,7 +12,6 @@ class EditController extends Controller
     }
 
     public function store(ChangeInfo $request) {
-        $this->user
         return view('user.edit.edit');
     }
 }

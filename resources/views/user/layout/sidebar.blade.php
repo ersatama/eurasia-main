@@ -12,6 +12,9 @@
         <a href="/my_insurance">
             <li class="list-group-item">Мои договоры</li>
         </a>
+        <a href="/messages">
+            <li class="list-group-item">Сообщения</li>
+        </a>
         <a href="/logout">
             <li class="list-group-item">Выйти</li>
         </a>
