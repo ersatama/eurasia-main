@@ -8,6 +8,7 @@ use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use App\Models\Message\Message;
 
 class RegisterController extends Controller
 {
@@ -67,6 +68,10 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        Message::create([
+            'phone' => $data['phone'],
+            'code' => mt_rand(100000, 999999),
+        ]);
 
         return User::create([
             'name' => mb_convert_encoding($data['name'], 'UTF-8'),

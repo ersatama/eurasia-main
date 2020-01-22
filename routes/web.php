@@ -33,6 +33,7 @@ Route::group(['middleware' => ['auth', 'sms']], function() {
 
 Route::group(['middleware' => ['auth']], function() {
     Route::get('/verify_sms', 'MessageController@verify')->name('sms');
+    Route::post('/verify_sms', 'MessageController@check');
 });
 
 //Route::post('/register', 'insuranceController@register')->name('Registration');
