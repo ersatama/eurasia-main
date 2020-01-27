@@ -9,6 +9,7 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Message\Message;
+use App\Repositories\Sms\SmsRepositoryEloquent as SMS;
 
 class RegisterController extends Controller
 {
@@ -68,10 +69,14 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        $code = mt_rand(100000, 999999);
+        $phone = $data['phone'];
         Message::create([
-            'phone' => $data['phone'],
-            'code' => mt_rand(100000, 999999),
+            'phone' => $phone,
+            'code' => $code,
         ]);
+        $sms = new SMS();
+        $sms->sendVerify($code,$phone);
 
         return User::create([
             'name' => mb_convert_encoding($data['name'], 'UTF-8'),

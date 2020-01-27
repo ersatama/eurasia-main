@@ -80,7 +80,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/styles.css') }}" rel="stylesheet">
-    <style>.landing-page-list__link_1 { background-image: url("/img/001.jpg") }.landing-page-list__link_2 { background-image: url("/img/002.jpg") }.landing-page-list__link_3 { background-image: url("/img/003.jpg") }.landing-page-list__link_13 { background-image: url("/img/005.jpg") }</style>
+    <style>.landing-page-list__link_1 { background-image: url("/img/001.jpg") }.landing-page-list__link_2 { background-image: url("/img/002.jpg") }.landing-page-list__link_3 { background-image: url("/img/003.jpg") }.landing-page-list__link_4 { background-image: url("/img/004.jpg") }.landing-page-list__link_13 { background-image: url("/img/005.jpg") }</style>
     @yield('styles')
 </head>
 <body>
@@ -273,10 +273,9 @@
         </div>
     </div>
 </footer>
-@include('layouts.modal.insurance')
 <script src="{{ asset('js/vendor.js?v=1567666965') }}" defer></script>
 <script src="{{ asset('js/app.js?v=1567666964') }}" defer></script>
-<script src="{{ asset('js/jquery-3.4.1.slim.min.js') }}" crossorigin="anonymous" defer></script>
+<script src="{{ asset('js/jquery-3.4.1.min.js') }}" crossorigin="anonymous" defer></script>
 <script src="{{ asset('js/popper.min.js') }}" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous" defer></script>
 <script src="{{ asset('js/bootstrap.min.js') }}" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous" defer></script>
 <script src="{{ asset('js/notify.min.js') }}" defer></script>
