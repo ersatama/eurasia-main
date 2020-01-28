@@ -7,17 +7,33 @@
                 <h6 class="modal-title">{{$title}}</h6>
             </div>
             <div class="modal-body pt-0">
-                <table class="table table-bordered mb-0 table-striped" style="font-size: 14px;">
+                <table class="table table-bordered mb-0" style="font-size: 14px;">
                     <tbody>
                         @foreach($body as $item)
-                            <tr>
+                            <tr class="form-tr">
                                 <td scope="row">{{$item[0]}}</td>
                                 <td>
-                                    <input type="text" value="{{$item[1]}}" class="form-control" @if($item[2]) readonly @endif>
+                                    @if($item[2] === 'input')
+                                        <input type="text" value="{{$item[1]}}" class="form-control form-input" @if($item[3]) readonly @endif>
+                                    @elseif ($item[2] === 'select')
+                                        <select class="custom-select form-select" @if($item[3]) readonly @endif>
+                                            @for($i=0,$size=sizeof($item[1]);$i<$size;$i++)
+                                                <option value="{{$item[1][$i]}}">{{$item[1][$i]}}</option>
+                                            @endfor
+                                        </select>
+                                    @endif
                                 </td>
                             </tr>
                         @endforeach
                     </tbody>
+                </table>
+                <table class="table table-primary table-bordered mt-3 mb-0" style="font-size: 14px;">
+                    @foreach($out as $item)
+                        <tr class="form-tr">
+                            <td scope="row">{{$item[0]}}</td>
+                            <td>{{$item[1]}}</td>
+                        </tr>
+                    @endforeach
                 </table>
                 <section class="section-preview mt-3">
                     <div class="custom-control custom-checkbox">

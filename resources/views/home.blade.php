@@ -8,14 +8,15 @@
 
                 @else
                     @php
-                        $body = [['Страховая сумма','1 000 000,00',false],['Страховая сумма','1 000 000,00',false],['Год рождения','1990',false],['Страховая премия','10 000',true]];
+                        $body = [['Дата расчета',date('d.m.Y'),'input',false],['Страховая сумма','1 000 000,00 ₸','input',false],['Дата рождения',['1990'],'select',false],['Пол',['Мужщина','Женщина'],'select',false]];
+                        $out = [['Возраст','22 лет','input',true],['Срок страхования','12 месяцев','input',true],['Страховая премия','10 000,00 ₸','input',true]];
                         $insurances = [
-                            ['id' => 'lifeInsurance','img' => 'landing-page-list__link_3','title' => 'Страхование жизни','body' => $body],
-                            ['id' => 'endowmentInsurance','img' => 'landing-page-list__link_4','title' => 'Аннуитетное страхование','body' => $body],
+                            ['id' => 'lifeInsurance','img' => 'landing-page-list__link_3','title' => 'Страхование жизни','body' => $body, 'out' => $out],
+                            ['id' => 'endowmentInsurance','img' => 'landing-page-list__link_4','title' => 'Аннуитетное страхование','body' => $body, 'out' => $out],
                             ['id' => 'accidentInsurance','img' => 'landing-page-list__link_1','title' => 'Страхование от несчастных случаев','body' => $body],
-                            ['id' => 'annuityInsurance','img' => 'landing-page-list__link_2','title' => 'Аннуитетное страхование','body' => $body],
-                            ['id' => 'touristInsurance','img' => 'landing-page-list__link_13','title' => 'Обязательное страхование туриста','body' => $body],
-                            ['id' => 'insurance','img' => 'landing-page-list__link_1','title' => 'Страхование работников от несчастных случаев','body' => $body]
+                            ['id' => 'annuityInsurance','img' => 'landing-page-list__link_2','title' => 'Аннуитетное страхование','body' => $body, 'out' => $out],
+                            ['id' => 'touristInsurance','img' => 'landing-page-list__link_13','title' => 'Обязательное страхование туриста','body' => $body, 'out' => $out],
+                            ['id' => 'insurance','img' => 'landing-page-list__link_1','title' => 'Страхование работников от несчастных случаев','body' => $body, 'out' => $out]
                             ];
                     @endphp
                     @foreach($insurances as $insurance)
