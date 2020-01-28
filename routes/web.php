@@ -12,7 +12,7 @@
 */
 
 
-//Route::get('/',['uses'=>'HomeController@index','as'=>'Main Page']);
+Route::get('/test',['uses'=>'TestController@index','as'=>'Main Page']);
 
 
 Auth::routes();
