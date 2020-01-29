@@ -38,7 +38,7 @@
                         </tr>
                     @endforeach
                 </table>
-                <section class="section-preview mt-3">
+                <section class="section-preview mt-3 d-none">
                     <div class="custom-control custom-checkbox">
                         <input type="checkbox" class="custom-control-input" id="defaultUnchecked1">
                         <label class="custom-control-label col-form-label login-remember" for="defaultUnchecked1">Включить страховое покрытие от несчастного случая</label>
