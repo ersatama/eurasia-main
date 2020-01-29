@@ -5,13 +5,16 @@
             @include('user.layout.sidebar')
             <div class="col-md-9">
                 @if(Auth::user()->status === 'admin')
-
                 @else
                     @php
-                        $body = [['Дата расчета',date('d.m.Y'),'input',false],['Страховая сумма','1 000 000,00 ₸','input',false],['Дата рождения',['1990'],'select',false],['Пол',['Мужщина','Женщина'],'select',false]];
-                        $out = [['Возраст','22 лет','input',true],['Срок страхования','12 месяцев','input',true],['Страховая премия','10 000,00 ₸','input',true]];
+                    //Auth::user()->iin '03.06.1994'
+                        $list = App\Models\Tariff\tariff::select('year', 'male', 'female')->get();//940603300497
+                        $body = [['Дата расчета',date('d.m.Y'),'input',true,'date'],['Страховая сумма','','input',false,'sum'],['Дата рождения',date('d.m.Y', strtotime(join('', [Auth::user()->iin[2],Auth::user()->iin[3],'/',Auth::user()->iin[4],Auth::user()->iin[5],'/',Auth::user()->iin[0],Auth::user()->iin[1]]))),'input',true,'birth'],['Пол',['Мужчина','Женщина'],'select',false,'sex']];
+
+                        $out = [['Возраст (18-65)','','input',true,'year'],['Срок страхования','12 месяцев','input',true,'duration'],['Страховая премия','0,00 ₸','input',true,'prize']];
+
                         $insurances = [
-                            ['id' => 'lifeInsurance','img' => 'landing-page-list__link_3','title' => 'Страхование жизни','body' => $body, 'out' => $out],
+                            ['id' => 'lifeInsurance','img' => 'landing-page-list__link_3','title' => 'Страхование жизни','body' => $body, 'out' => $out, 'data'=>$list],
                             ['id' => 'endowmentInsurance','img' => 'landing-page-list__link_4','title' => 'Аннуитетное страхование','body' => $body, 'out' => $out],
                             ['id' => 'accidentInsurance','img' => 'landing-page-list__link_1','title' => 'Страхование от несчастных случаев','body' => $body],
                             ['id' => 'annuityInsurance','img' => 'landing-page-list__link_2','title' => 'Аннуитетное страхование','body' => $body, 'out' => $out],
@@ -22,6 +25,10 @@
                     @foreach($insurances as $insurance)
                         @include('layouts.modal.insurance',$insurance)
                     @endforeach
+                    @section('scripts')
+                        <script src="{{ asset('js/jquery.maskMoney.js') }}" defer></script>
+                        <script src="{{ asset('js/form-modal.js') }}" defer></script>
+                    @endsection
                     <h3>Наши Услуги</h3>
                     <div class="row mt-4 product-list">
                         <div class="col-sm-6 col-md-6 col-lg-4">
@@ -123,9 +130,7 @@
                                     </div>
                                 </div>
                                 <div class="product__title">Страхование работников от несчастных случаев</div>
-                                <div class="product__desc link_active">Обязательное страхование работников от несчастных
-                                    случаев (ОСНС).
-                                </div>
+                                <div class="product__desc link_active">Обязательное страхование работников от несчастных  случаев (ОСНС).</div>
                                 <div class="product-btn-main">
                                     <button class="btn btn-success btn-login btn-sm product-btn" data-toggle="modal"
                                             data-target="#insurance">Заключить договор

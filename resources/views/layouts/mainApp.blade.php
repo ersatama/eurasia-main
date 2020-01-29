@@ -77,8 +77,8 @@
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
-
     <!-- Styles -->
+    <link href="{{ asset('css/jquery.datetimepicker.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/styles.css') }}" rel="stylesheet">
     <style>.landing-page-list__link_1 { background-image: url("/img/001.jpg") }.landing-page-list__link_2 { background-image: url("/img/002.jpg") }.landing-page-list__link_3 { background-image: url("/img/003.jpg") }.landing-page-list__link_4 { background-image: url("/img/004.jpg") }.landing-page-list__link_13 { background-image: url("/img/005.jpg") }</style>
     @yield('styles')

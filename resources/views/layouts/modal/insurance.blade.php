@@ -4,9 +4,12 @@
         <div class="modal-content overflow-hidden">
             <div class="product__img product__img__modal {{$img}}"></div>
             <div class="modal-header border-0">
-                <h6 class="modal-title">{{$title}}</h6>
+                <h6 class="modal-title">{{$title}} - Калькулятор</h6>
             </div>
             <div class="modal-body pt-0">
+                @if(isset($data))
+                    <input type="hidden" id="data" value="{{$data}}">
+                @endif
                 <table class="table table-bordered mb-0" style="font-size: 14px;">
                     <tbody>
                         @foreach($body as $item)
@@ -14,11 +17,11 @@
                                 <td scope="row">{{$item[0]}}</td>
                                 <td>
                                     @if($item[2] === 'input')
-                                        <input type="text" value="{{$item[1]}}" class="form-control form-input" @if($item[3]) readonly @endif>
+                                        <input type="text" value="{{$item[1]}}" id="{{$id}}-{{$item[4]}}" name="{{$id}}-{{$item[4]}}" class="form-control form-input" @if($item[3]) readonly @endif @if($item[4] === 'sum') placeholder="0.00 ₸" @endif>
                                     @elseif ($item[2] === 'select')
-                                        <select class="custom-select form-select" @if($item[3]) readonly @endif>
+                                        <select class="custom-select form-select" id="{{$id}}-{{$item[4]}}" @if($item[3]) readonly @endif>
                                             @for($i=0,$size=sizeof($item[1]);$i<$size;$i++)
-                                                <option value="{{$item[1][$i]}}">{{$item[1][$i]}}</option>
+                                                <option value="{{$i}}">{{$item[1][$i]}}</option>
                                             @endfor
                                         </select>
                                     @endif
@@ -31,7 +34,7 @@
                     @foreach($out as $item)
                         <tr class="form-tr">
                             <td scope="row">{{$item[0]}}</td>
-                            <td>{{$item[1]}}</td>
+                            <td id="{{$id}}-{{$item[4]}}">{{$item[1]}}</td>
                         </tr>
                     @endforeach
                 </table>
