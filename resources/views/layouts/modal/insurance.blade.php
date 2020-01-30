@@ -4,7 +4,7 @@
         <div class="modal-content overflow-hidden">
             <div class="product__img product__img__modal {{$img}}"></div>
             <div class="modal-header border-0">
-                <h6 class="modal-title">{{$title}} - Калькулятор</h6>
+                <h6 class="modal-title">{{$title}}</h6>
             </div>
             <div class="modal-body pt-0">
                 @if(isset($data))
@@ -54,9 +54,7 @@
                             </button>
                         </div>
                         <div class="col-8">
-                            <button type="button" class="btn btn-primary btn-login product-btn">Перейти к заполнению
-                                анкеты
-                            </button>
+                            <button type="button" class="btn btn-primary btn-login product-btn {{$id}}" data-dismiss="modal">Перейти к заполнению анкеты</button>
                         </div>
                     </div>
                 </div>
