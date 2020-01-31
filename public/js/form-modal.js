@@ -21,7 +21,86 @@ $(document).ready(function () {
     });
 
     $(".accidentInsurance").click(function() {
-        $("#profile").modal('show');
+        let data = insurance.life('accidentInsurance');
+        if (data) {
+            $("#profile-img").replaceWith('<div class="product__img product__img__modal" id="profile-img"></div>');
+            $("#profile-img").addClass($("#accidentInsurance-img").val());
+            $("#insurance-type").val(2);
+            $("#insurance-year").val(data.year);
+            $("#insurance-birth").val(data.birth);
+            $("#insurance-sum").val(data.sum);
+            $("#profile-sum-view").html(data.sum+"  ₸");
+            $("#insurance-prize").val(data.prize);
+            $("#accidentInsurance").modal('toggle');
+            $('#profile-rule, #profile-rule-1, #profile-rule-2, #profile-rule-3').attr('checked', false);
+            setTimeout(function() {
+                $("#profile").modal('toggle');
+            },400);
+        }
+
+    });
+
+    $("#profile-btn").bind('click', function() {
+        let rule = $("#profile-rule");
+        let rule_1 = $("#profile-rule-1");
+        let rule_2 = $("#profile-rule-2");
+        let rule_3 = $("#profile-rule-3");
+        let type = $("#insurance-type").val();
+        let year = $("#insurance-year").val();
+        let birth = $("#insurance-birth").val();
+        let sum = $("#insurance-sum").val();
+        let prize = $("#insurance-prize").val();
+        if ($(rule).is(":checked")&&$(rule_1).is(":checked")&&$(rule_2).is(":checked")&&$(rule_3).is(":checked")) {
+            let fullName = $("#profile-fullName");
+            let iin = $("#profile-iin");
+            let residence = $("input[name='profile-residence']:checked").val();
+            let country = $("#profile-country");
+            let ipdl = $("input[name='ipdl']:checked").val();
+            let passport = $("#profile-passport");
+            let address = $("#profile-address");
+            let addressFact = $("#profile-address-fact");
+            let phone = $("#profile-phone");
+            let email = $("#profile-email");
+            let aim = $("input[name='profile-aim']:checked").val();
+            if (fullName.val().trim() === '') return fullName.focus();
+            if (iin.val().trim() === '') return iin.focus();
+            if (passport.val().trim() === '') return passport.focus();
+            if (address.val().trim() === '') return address.focus();
+            if (addressFact.val().trim() === '') return addressFact.focus();
+            if (phone.val().trim() === '') return phone.focus();
+            if (email.val().trim() === '') return email.focus();
+
+            let info = {
+                'type': type,
+                'year': year,
+                'birth': birth,
+                'sum': sum,
+                'prize': prize,
+                'fullName': fullName.val().trim(),
+                'iin': iin.val().trim(),
+                'residence': residence,
+                'country': country.val().trim(),
+                'ipdl': ipdl,
+                'passport': passport.val().trim(),
+                'address': address.val().trim(),
+                'addressFact': addressFact.val().trim(),
+                'phone': phone.val().trim(),
+                'email': email.val().trim(),
+                'aim': aim
+            };
+            $.ajax({
+                type: "POST",
+                url: '/home',
+                data: info,
+                success: function (response) {
+                    alert(response);
+                },
+                error: function(XMLHttpRequest, textStatus, errorThrown) {
+                    alert("Status: " + textStatus); alert("Error: " + errorThrown);
+                }
+            });
+            console.log(info);
+        }
     });
 
     $('#profile-rule, #profile-rule-1, #profile-rule-2, #profile-rule-3').bind('change', function() {
@@ -36,6 +115,7 @@ $(document).ready(function () {
         } else {
             $("#profile-btn").addClass('disabled');
         }
+
     });
 });
 
@@ -51,9 +131,22 @@ let insurance = {
         if (year >= 18 && year <= 65) {
             let prize = insurance.prize(sum, year, sex);
             $("#"+id+"-prize").html(((parseInt(prize * 100)) / 100) + ' ₸');
+            if (prize !== 0) {
+                $("."+id).removeClass("disabled");
+                return {
+                    sum: sum,
+                    prize: prize,
+                    year: year,
+                    birth: birth
+                };
+            } else {
+                $("."+id).addClass("disabled");
+            }
         } else {
             $("#"+id+"-prize").html('0.00 ₸');
+            $("."+id).addClass("disabled");
         }
+        return false;
     },
     prize: function (sum, year, sex) {
         let data = JSON.parse($("#data").val());

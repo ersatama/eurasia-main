@@ -10,6 +10,7 @@
                 @if(isset($data))
                     <input type="hidden" id="data" value="{{$data}}">
                 @endif
+                <input type="hidden" id="{{$id}}-img" value="{{$img}}">
                 <table class="table table-bordered mb-0" style="font-size: 14px;">
                     <tbody>
                         @foreach($body as $item)
@@ -49,12 +50,10 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-4">
-                            <button type="button" class="btn btn-secondary btn-login product-btn" data-dismiss="modal">
-                                Закрыть
-                            </button>
+                            <button type="button" class="btn btn-secondary btn-login product-btn" data-dismiss="modal">Закрыть</button>
                         </div>
                         <div class="col-8">
-                            <button type="button" class="btn btn-primary btn-login product-btn {{$id}}" data-dismiss="modal">Перейти к заполнению анкеты</button>
+                            <button type="button" class="btn btn-primary btn-login product-btn {{$id}} disabled">Перейти к заполнению анкеты</button>
                         </div>
                     </div>
                 </div>

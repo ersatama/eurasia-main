@@ -15,7 +15,7 @@
 
                         $insurances = [
                             ['id' => 'lifeInsurance','img' => 'landing-page-list__link_3','title' => 'Страхование жизни','body' => $body, 'out' => $out, 'data'=>$list],
-                            ['id' => 'endowmentInsurance','img' => 'landing-page-list__link_4','title' => 'Аннуитетное страхование','body' => $body, 'out' => $out],
+                            ['id' => 'endowmentInsurance','img' => 'landing-page-list__link_4','title' => 'Накопительное страхование жизни','body' => $body, 'out' => $out],
                             ['id' => 'accidentInsurance','img' => 'landing-page-list__link_1','title' => 'Страхование от несчастных случаев','body' => $body],
                             ['id' => 'annuityInsurance','img' => 'landing-page-list__link_2','title' => 'Аннуитетное страхование','body' => $body, 'out' => $out],
                             ['id' => 'touristInsurance','img' => 'landing-page-list__link_13','title' => 'Обязательное страхование туриста','body' => $body, 'out' => $out],
@@ -46,7 +46,7 @@
                             </div>
                             <div class="product-btn-main">
                                 <button class="btn btn-success btn-login btn-sm product-btn" data-toggle="modal"
-                                        data-target="#lifeInsurance">Заключить договор
+                                        onclick="$('#lifeInsurance').modal({show: true});">Заключить договор
                                 </button>
                             </div>
                         </div>
@@ -63,7 +63,7 @@
                             </div>
                             <div class="product-btn-main">
                                 <button class="btn btn-success btn-login btn-sm product-btn" data-toggle="modal"
-                                        data-target="#profile">Заключить договор
+                                        onclick="$('#endowmentInsurance').modal({show: true});">Заключить договор
                                 </button>
                             </div>
                         </div>
@@ -82,7 +82,7 @@
                             </div>
                             <div class="product-btn-main">
                                 <button class="btn btn-success btn-login btn-sm product-btn" data-toggle="modal"
-                                        data-target="#accidentInsurance">Заключить договор
+                                        onclick="$('#accidentInsurance').modal({show: true});">Заключить договор
                                 </button>
                             </div>
                         </div>

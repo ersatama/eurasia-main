@@ -2,7 +2,12 @@
      aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content overflow-hidden">
-            <div class="product__img product__img__modal landing-page-list__link_1"></div>
+            <input type="hidden" id="insurance-type" value="">
+            <input type="hidden" id="insurance-year" value="">
+            <input type="hidden" id="insurance-prize" value="">
+            <input type="hidden" id="insurance-sum" value="">
+            <input type="hidden" id="insurance-prize" value="">
+            <div class="product__img product__img__modal" id="profile-img"></div>
             <div class="modal-header border-0">
                 <h6 class="modal-title">Заполнение анкеты</h6>
             </div>
@@ -36,13 +41,13 @@
                         <td>
                             <form onselectstart="return false;">
                                 <div class="custom-control custom-radio custom-control-inline">
-                                    <input type="radio" checked class="custom-control-input" id="profile-residence" name="profile-residence" checked>
+                                    <input type="radio" checked class="custom-control-input" id="profile-residence" name="profile-residence" checked value="1">
                                     <label class="custom-control-label" for="profile-residence">
                                         <span class="radio-title">Резидент</span>
                                     </label>
                                 </div>
                                 <div class="custom-control custom-radio custom-control-inline">
-                                    <input type="radio" class="custom-control-input" id="profile-residence-1" name="profile-residence">
+                                    <input type="radio" class="custom-control-input" id="profile-residence-1" name="profile-residence" value="0">
                                     <label class="custom-control-label" for="profile-residence-1">
                                         <span class="radio-title">Нерезидент</span>
                                     </label>
@@ -54,28 +59,28 @@
                         <td scope="row">Страна резиденства</td>
                         <td>
                             <select class="custom-select form-select" id="profile-country">
-                                <option value="0">Казахстан</option>
-                                <option value="1">Россия</option>
+                                <option value="kz">Казахстан</option>
+                                <option value="ru">Россия</option>
                             </select>
                         </td>
                     </tr>
                     <tr class="form-tr">
                         <td scope="row">Является ИПДЛ*</td>
                         <td>
-                            <form onselectstart="return false;">
+                            <div onselectstart="return false;">
                                 <div class="custom-control custom-radio custom-control-inline">
-                                    <input type="radio" class="custom-control-input" id="profile-ipdl" name="ipdl">
+                                    <input type="radio" class="custom-control-input" id="profile-ipdl" name="ipdl" value="1">
                                     <label class="custom-control-label" for="profile-ipdl">
                                         <span class="radio-title">Да</span>
                                     </label>
                                 </div>
                                 <div class="custom-control custom-radio custom-control-inline">
-                                    <input type="radio" checked class="custom-control-input" id="profile-ipdl-2" name="ipdl">
+                                    <input type="radio" checked class="custom-control-input" id="profile-ipdl-2" name="ipdl" value="0">
                                     <label class="custom-control-label" for="profile-ipdl-2">
                                         <span class="radio-title">Нет</span>
                                     </label>
                                 </div>
-                            </form>
+                            </div>
                         </td>
                     </tr>
                     <tr class="form-tr">
@@ -111,14 +116,14 @@
                     <tr class="form-tr">
                         <td scope="row">Цель и характер деловых отношений</td>
                         <td>
-                            <form onselectstart="return false;">
+                            <div onselectstart="return false;">
                                 <div class="custom-control custom-radio custom-control-inline">
-                                    <input type="radio" checked class="custom-control-input" id="profile-aim" name="profile-aim">
+                                    <input type="radio" checked class="custom-control-input" id="profile-aim" name="profile-aim" value="1">
                                     <label class="custom-control-label" for="profile-aim">
                                         <span class="radio-title">Срочное стахование</span>
                                     </label>
                                 </div>
-                            </form>
+                            </div>
                         </td>
                     </tr>
                 </table>
@@ -128,11 +133,11 @@
                     </tr>
                     <tr class="form-tr">
                         <td scope="row">Срок страхования</td>
-                        <td id="profile-date-view">с 20.06.2020 по 20.06.2021</td>
+                        <td id="profile-date-view" id="profile-date-view">{{date('d.m.Y')}}</td>
                     </tr>
                     <tr class="form-tr">
                         <td scope="row">Страховая сумма</td>
-                        <td id="profile-sum-view">1 000 000,00 ₸</td>
+                        <td id="profile-sum-view" id="profile-sum-view">0.00 ₸</td>
                     </tr>
                 </table>
                 <p class="text-justify mt-3">
@@ -193,7 +198,7 @@
                             </button>
                         </div>
                         <div class="col-8">
-                            <button type="button" class="btn btn-primary btn-login product-btn disabled" id="profile-btn">
+                            <button type="button" class="btn btn-success btn-login product-btn disabled" id="profile-btn">
                                 Заключенить договор и оплатить
                             </button>
                         </div>
