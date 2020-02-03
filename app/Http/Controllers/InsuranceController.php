@@ -3,15 +3,20 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Repositories\Contract\ContractRepositoryEloquent;
 
 class InsuranceController extends Controller
 {
-    public function __construct()
+
+    protected $contractRepositoryEloquent;
+    public function __construct(ContractRepositoryEloquent $contractRepositoryEloquent)
     {
+        $this->contractRepositoryEloquent = $contractRepositoryEloquent;
     }
 
     public function list() {
+        $contractRepositoryEloquent = $this->contractRepositoryEloquent;
+        // $contractRepositoryEloquent 
         return view('user.insurance.myInsurance');
     }
 

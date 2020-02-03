@@ -33,7 +33,6 @@ class Soap extends Model
                 'InsuredName' => $data['InsuredName']
             ]);
             if ($response->return === 0) {
-
                 $xml = $this->documentXML($data);
 
                 $save = $soapClient->SaveDocument((object)[
