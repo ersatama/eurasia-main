@@ -3,35 +3,98 @@
 namespace App\Models\Soap;
 
 use Illuminate\Database\Eloquent\Model;
+use Spatie\ArrayToXml\ArrayToXml;
+//use Orchestra\Parser\Xml\Facade as XmlParser;
 
 class Soap extends Model
 {
-	protected const USER = 'EuBankTest';
-	protected const PASSWORD = 'gfj@iuGHqqew';
-	protected const URL = 'http://sb.eulife.kz:8958/wsEubankTest/ws/wsNovelty.1cws?wsdl';
+    protected const USER = 'EuBankTest';
+    protected const PASSWORD = 'gfj@iuGHqqew';
+    protected const URL = 'http://sb.eulife.kz:8958/wsEubankTest/ws/wsNovelty.1cws?wsdl';
 
-    public function start() {
+    public function start(array $data)
+    {
 
-    	$parameters = [
-    		'login' => self::USER,
-    		'password' => self::PASSWORD,
-    		'trace' => true
-    	];
+        $parameters = [
+            'login' => self::USER,
+            'password' => self::PASSWORD,
+            'trace' => true
+        ];
 
-    	$soapClient = new \SoapClient(self::URL, $parameters);
-        $response = $soapClient->CreateNewDocument((object)['ID'=>1,'OperationType'=>'новый договор','InsuranceProduct'=>'NSL_EB','Insured'=>'940603300487','Middleman'=>'940603300487','PreviousID'=>0,'InsuredName'=>'Era Tama']);
-        print_r($response);
+        try {
+            $soapClient = new \SoapClient(self::URL, $parameters);
+            $response = $soapClient->CreateNewDocument((object)[
+                'ID' => $data['ID'],
+                'OperationType' => $data['OperationType'],
+                'InsuranceProduct' => $data['InsuranceProduct'],
+                'Insured' => $data['Insured'],
+                'Middleman' => $data['Middleman'],
+                'PreviousID' => 0,//$data['PreviousID'],
+                'InsuredName' => $data['InsuredName']
+            ]);
+            if ($response->return === 0) {
+
+                $xml = $this->documentXML($data);
+
+                $save = $soapClient->SaveDocument((object)[
+                    'ID' => $data['ID'],
+                    'OperationType' => $data['OperationType'],
+                    'DocumentXML' => $xml
+                ]);
+
+                print_r($save);
+                exit;
+
+                return true;
+            } else {
+                    exit('hello world');
+                return false;
+            }
+        } catch (Exception $e) {
+            dd($e);
+        }
+    }
+
+    public function documentXML(array $data) {
+        //$xml = XmlParser::load(asset('storage/res/DocumentXML.xml'));
+        return view('xml.DocumentXML',compact('data'))->render();
+//        print_r(base64_encode(ArrayToXml::convert(['POLICY'=>[]])));
         exit;
-        return true;
-    	try {
-    		$soap = /*(object) [1,"новый договор",'NSL_EB','940603300487','940603300487',0,'Era Tama'];//*/(object) ['ID'=>1,'OperationType'=>'OperationType','InsuranceProduct'=>'NSL_EB','Insured'=>'940603300487','Middleman'=>'940603300487','PreviousID'=>0,'InsuredName'=>'Era Tama'];
-    		echo $soapClient->CreateNewDocument($soap/*[1,"новый договор",'NSL_EB','940603300487','940603300487',0,'Era Tama']*/);
-
-    	} catch (Exception $e) {
-    		dd($e);
-    	}
+        /*return ArrayToXml::convert(['POLICY'=>[]]);*/
+        return base64_encode(view('xml.DocumentXML',compact('data'))->render());
 
         /*
+         * Array
+(
+    [ID] => 61
+    [OperationType] => новый договор
+    [InsuranceProduct] => NSL_EB
+    [Insured] => 940603300487
+    [Middleman] => 940603300487
+    [PreviousID] => 60
+    [InsuredName] => Dsaasda Ersata
+    [user] => 7
+    [name] => Dsaasda Ersata
+    [iin] => 940603300487
+    [type] => 2
+    [year] => 25
+    [birth] => 1994-06-03
+    [sum] => 5000000.00
+    [prize] => 27954.4548148148
+    [residence] => 1
+    [country] => kz
+    [ipdl] => 0
+    [passport] => rewr
+    [address] => werwer
+    [addressFact] => werwer
+    [phone] => +7(776) 555-55-55
+    [email] => ersatama@gmail.com
+    [aim] => 1
+)
+         */
+    }
+
+    /*
          Array
 (
     [0] => CreateNewDocumentResponse CreateNewDocument(CreateNewDocument $parameters)
@@ -80,5 +143,5 @@ class Soap extends Model
     [43] => CheckPolicyByDriverAndTFResponse CheckPolicyByDriverAndTF(CheckPolicyByDriverAndTF $parameters)
 )
          */
-    }
+
 }

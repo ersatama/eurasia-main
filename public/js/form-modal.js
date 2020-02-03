@@ -27,6 +27,7 @@ $(document).ready(function () {
             $("#profile-img").addClass($("#accidentInsurance-img").val());
             $("#insurance-type").val(2);
             $("#insurance-year").val(data.year);
+            $("#insurance-start").val(data.start);
             $("#insurance-birth").val(data.birth);
             $("#insurance-sum").val(data.sum);
             $("#profile-sum-view").html(data.sum+"  ₸");
@@ -46,6 +47,7 @@ $(document).ready(function () {
         let rule_2 = $("#profile-rule-2");
         let rule_3 = $("#profile-rule-3");
         let type = $("#insurance-type").val();
+        let start =  $("#insurance-start").val();
         let year = $("#insurance-year").val();
         let birth = $("#insurance-birth").val();
         let sum = $("#insurance-sum").val();
@@ -73,6 +75,7 @@ $(document).ready(function () {
             let info = {
                 'type': type,
                 'year': year,
+                'start': start,
                 'birth': birth,
                 'sum': sum,
                 'prize': prize,
@@ -94,12 +97,12 @@ $(document).ready(function () {
                 data: info,
                 success: function (response) {
                     alert(response);
+                    console.log(response);
                 },
                 error: function(XMLHttpRequest, textStatus, errorThrown) {
-                    alert("Status: " + textStatus); alert("Error: " + errorThrown);
+                    console.error("Status: " + textStatus+" --- Error: " + errorThrown);
                 }
             });
-            console.log(info);
         }
     });
 
@@ -125,6 +128,7 @@ let insurance = {
         let sum = $("#"+id+"-sum").val().replace(/[^0-9\.]/g, '');
         let birth = $("#"+id+"-birth").val();
         let sex = $("#"+id+"-sex").val();
+        let start = $("#"+id+"-date").val();
         let year = insurance.dateDiff(birth);
 
         $("#"+id+"-year").html(insurance.text(year));
@@ -136,6 +140,7 @@ let insurance = {
                 return {
                     sum: sum,
                     prize: prize,
+                    start: start,
                     year: year,
                     birth: birth
                 };

@@ -19,6 +19,7 @@ class CreateContractsTable extends Migration
             $table->string('name');
             $table->string('iin');
             $table->smallInteger('type');
+            $table->date('start');
             $table->smallInteger('year');
             $table->date('birth');
             $table->string('sum');

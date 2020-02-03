@@ -91,6 +91,10 @@
       <path value="$PROJECT_DIR$/vendor/jakub-onderka/php-console-highlighter" />
       <path value="$PROJECT_DIR$/vendor/jakub-onderka/php-console-color" />
       <path value="$PROJECT_DIR$/vendor/jason-guru/laravel-make-repository" />
+      <path value="$PROJECT_DIR$/vendor/spatie/array-to-xml" />
+      <path value="$PROJECT_DIR$/vendor/laravie/parser" />
+      <path value="$PROJECT_DIR$/vendor/orchestra/parser" />
+      <path value="$PROJECT_DIR$/vendor/tightenco/collect" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.2" />

@@ -3,6 +3,7 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content overflow-hidden">
             <input type="hidden" id="insurance-type" value="">
+            <input type="hidden" id="insurance-start" value="">
             <input type="hidden" id="insurance-year" value="">
             <input type="hidden" id="insurance-prize" value="">
             <input type="hidden" id="insurance-sum" value="">

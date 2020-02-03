@@ -4,8 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+
 class InsuranceController extends Controller
 {
+    public function __construct()
+    {
+    }
 
     public function list() {
         return view('user.insurance.myInsurance');
