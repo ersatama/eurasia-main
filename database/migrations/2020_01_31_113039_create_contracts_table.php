@@ -15,28 +15,34 @@ class CreateContractsTable extends Migration
     {
         Schema::create('contracts', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->smallInteger('type');
             $table->bigInteger('user');
             $table->string('name');
+            $table->string('surname')->nullable();
+            $table->string('lastname')->nullable();
+            $table->char('sex',1);
             $table->string('iin');
-            $table->smallInteger('type');
+            $table->char('doctype',1);
+            $table->string('number');
+            $table->text('givenBy');
+            $table->date('givenDate');
+            $table->date('expirationDate');
+            $table->smallInteger('residence');
             $table->date('start');
             $table->smallInteger('year');
             $table->date('birth');
             $table->string('sum');
             $table->string('prize');
-            $table->smallInteger('residence');
             $table->char('country',2);
             $table->smallInteger('ipdl');
-            $table->string('passport');
-            $table->string('address');
-            $table->string('addressFact');
+            $table->text('address');
+            $table->text('addressFact');
             $table->string('phone');
             $table->string('email')->nullable();
             $table->smallInteger('aim');
             $table->timestamps();
         });
     }
-
     /**
      * Reverse the migrations.
      *

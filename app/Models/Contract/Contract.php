@@ -7,7 +7,31 @@ use Illuminate\Database\Eloquent\Model;
 class Contract extends Model
 {
     protected $fillable = [
-        'user', 'name', 'iin', 'type', 'start', 'year', 'birth', 'sum', 'prize', 'residence', 'country', 'ipdl', 'passport', 'address', 'addressFact', 'phone', 'email', 'aim'
+        'user',
+        'name',
+        'surname',
+        'lastname',
+        'iin',
+        'sex',
+        'doctype',
+        'givenBy',
+        'givenDate',
+        'expirationDate',
+        'number',
+        'type',
+        'start',
+        'year',
+        'birth',
+        'sum',
+        'prize',
+        'residence',
+        'country',
+        'ipdl',
+        'address',
+        'addressFact',
+        'phone',
+        'email',
+        'aim'
     ];
 
     public function user()

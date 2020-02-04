@@ -2,7 +2,7 @@ $(document).ready(function () {
 
     $('#lifeInsurance-sum, #accidentInsurance-sum').maskMoney({thousands: ' ', decimal: '.', allowZero: true, suffix: ' ₸'});
 
-    $("#lifeInsurance-date, #lifeInsurance-birth, #accidentInsurance-date, #accidentInsurance-birth").datetimepicker({format: 'd.m.Y'});
+    $("#lifeInsurance-date, #lifeInsurance-birth, #accidentInsurance-date, #accidentInsurance-birth, #profile-givenDate, #profile-ExpirationDate").datetimepicker({format: 'd.m.Y'});
 
     insurance.life('lifeInsurance');
     $("#lifeInsurance-sum").bind('keyup', function () {
@@ -30,6 +30,7 @@ $(document).ready(function () {
             $("#insurance-start").val(data.start);
             $("#insurance-birth").val(data.birth);
             $("#insurance-sum").val(data.sum);
+            $("#insurance-sex").val(data.sex);
             $("#profile-sum-view").html(data.sum+"  ₸");
             $("#insurance-prize").val(data.prize);
             $("#accidentInsurance").modal('toggle');
@@ -41,7 +42,32 @@ $(document).ready(function () {
 
     });
 
+    $(".lifeInsurance").click(function() {
+        let data = insurance.life('lifeInsurance');
+        if (data) {
+            $("#profile-img").replaceWith('<div class="product__img product__img__modal" id="profile-img"></div>');
+            $("#profile-img").addClass($("#accidentInsurance-img").val());
+            $("#insurance-type").val(1);
+            $("#insurance-year").val(data.year);
+            $("#insurance-start").val(data.start);
+            $("#insurance-birth").val(data.birth);
+            $("#insurance-sum").val(data.sum);
+            $("#insurance-sex").val(data.sex);
+            $("#profile-sum-view").html(data.sum+"  ₸");
+            $("#insurance-prize").val(data.prize);
+            $("#lifeInsurance").modal('toggle');
+            $('#profile-rule, #profile-rule-1, #profile-rule-2, #profile-rule-3').attr('checked', false);
+            setTimeout(function() {
+                $("#profile").modal('toggle');
+            },400);
+        }
+
+    });
+    var status = 'on';
     $("#profile-btn").bind('click', function() {
+        if (status === 'off') {
+            return;
+        }
         let rule = $("#profile-rule");
         let rule_1 = $("#profile-rule-1");
         let rule_2 = $("#profile-rule-2");
@@ -52,25 +78,34 @@ $(document).ready(function () {
         let birth = $("#insurance-birth").val();
         let sum = $("#insurance-sum").val();
         let prize = $("#insurance-prize").val();
+        let sex = $("#insurance-sex").val();
         if ($(rule).is(":checked")&&$(rule_1).is(":checked")&&$(rule_2).is(":checked")&&$(rule_3).is(":checked")) {
-            let fullName = $("#profile-fullName");
+            let surname = $("#profile-surname");
+            let name = $("#profile-name");
+            let lastname = $("#profile-lastname");
             let iin = $("#profile-iin");
+            let doctype = $("input[name='docType']:checked").val();
+            let number = $("#profile-number");
+            let givenby = $("#profile-givenBy");
+            let givendate = $("#profile-givenDate");
+            let expirationdate = $("#profile-ExpirationDate");
             let residence = $("input[name='profile-residence']:checked").val();
             let country = $("#profile-country");
             let ipdl = $("input[name='ipdl']:checked").val();
-            let passport = $("#profile-passport");
             let address = $("#profile-address");
             let addressFact = $("#profile-address-fact");
             let phone = $("#profile-phone");
             let email = $("#profile-email");
             let aim = $("input[name='profile-aim']:checked").val();
-            if (fullName.val().trim() === '') return fullName.focus();
+            if (surname.val().trim() === '') return surname.focus();
+            if (name.val().trim() === '') return name.focus();
             if (iin.val().trim() === '') return iin.focus();
-            if (passport.val().trim() === '') return passport.focus();
+            if (number.val().trim() === '') return number.focus();
+            if (givenby.val().trim() === '') return givenby.focus();
+            if (givendate.val().trim() === '') return givendate.focus();
+            if (expirationdate.val().trim() === '') return expirationdate.focus();
             if (address.val().trim() === '') return address.focus();
             if (addressFact.val().trim() === '') return addressFact.focus();
-            if (phone.val().trim() === '') return phone.focus();
-            if (email.val().trim() === '') return email.focus();
 
             let info = {
                 'type': type,
@@ -79,28 +114,41 @@ $(document).ready(function () {
                 'birth': birth,
                 'sum': sum,
                 'prize': prize,
-                'fullName': fullName.val().trim(),
+                'sex': sex,
+                'surname': surname.val().trim(),
+                'name': name.val().trim(),
+                'lastname': lastname.val().trim(),
                 'iin': iin.val().trim(),
+                'doctype': doctype,
+                'number': number.val().trim(),
+                'givenby': givenby.val().trim(),
+                'givendate': givendate.val().trim(),
+                'expirationdate': expirationdate.val().trim(),
                 'residence': residence,
                 'country': country.val().trim(),
                 'ipdl': ipdl,
-                'passport': passport.val().trim(),
                 'address': address.val().trim(),
                 'addressFact': addressFact.val().trim(),
                 'phone': phone.val().trim(),
                 'email': email.val().trim(),
                 'aim': aim
             };
+
+            status = 'off';
             $.ajax({
                 type: "POST",
                 url: '/home',
                 data: info,
                 success: function (response) {
-                    alert(response);
-                    console.log(response);
+                    $.notify(response.status,'success');
+                    console.log(response.status);
+                    window.location.href = '/my_insurance';
                 },
                 error: function(XMLHttpRequest, textStatus, errorThrown) {
-                    console.error("Status: " + textStatus+" --- Error: " + errorThrown);
+                    let mes = JSON.parse(XMLHttpRequest.responseText);
+                    console.log(mes.status);
+                    $.notify(mes.status, "error");
+                    status = 'on';
                 }
             });
         }
@@ -127,7 +175,7 @@ let insurance = {
 
         let sum = $("#"+id+"-sum").val().replace(/[^0-9\.]/g, '');
         let birth = $("#"+id+"-birth").val();
-        let sex = $("#"+id+"-sex").val();
+        let sex = parseInt($("#"+id+"-sex").val())+1;
         let start = $("#"+id+"-date").val();
         let year = insurance.dateDiff(birth);
 
@@ -142,7 +190,8 @@ let insurance = {
                     prize: prize,
                     start: start,
                     year: year,
-                    birth: birth
+                    birth: birth,
+                    sex: sex
                 };
             } else {
                 $("."+id).addClass("disabled");

@@ -9,7 +9,7 @@
                     @php
                     //Auth::user()->iin '03.06.1994'
                         $list = App\Models\Tariff\tariff::select('year', 'male', 'female')->get();//940603300497
-                        $body = [['Дата расчета',date('d.m.Y'),'input',true,'date'],['Страховая сумма','','input',false,'sum'],['Дата рождения',date('d.m.Y', strtotime(join('', [Auth::user()->iin[2],Auth::user()->iin[3],'/',Auth::user()->iin[4],Auth::user()->iin[5],'/',Auth::user()->iin[0],Auth::user()->iin[1]]))),'input',true,'birth'],['Пол',['Мужчина','Женщина'],'select',false,'sex']];
+                        $body = [['Дата расчета',date('d.m.Y'),'input',false,'date'],['Страховая сумма','','input',false,'sum'],['Дата рождения',date('d.m.Y', strtotime(join('', [Auth::user()->iin[2],Auth::user()->iin[3],'/',Auth::user()->iin[4],Auth::user()->iin[5],'/',Auth::user()->iin[0],Auth::user()->iin[1]]))),'input',false,'birth'],['Пол',['Мужчина','Женщина'],'select',false,'sex']];
 
                         $out = [['Возраст (18-65)','','input',true,'year'],['Срок страхования','12 месяцев','input',true,'duration'],['Страховая премия','0,00 ₸','input',true,'prize']];
 

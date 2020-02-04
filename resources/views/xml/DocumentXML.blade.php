@@ -1,10 +1,10 @@
 <POLICY xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
     <POLICY_ID>{{$data['ID']}}</POLICY_ID>				<!-- ID : string-->
     <POLICY_DATE>{{date('d.m.Y')}}</POLICY_DATE> 			<!-- Дата заключения : date-->
-    <BEG_DATE>16.09.2019</BEG_DATE>				<!-- Дата начала действия договора страхования : date-->
-    <END_DATE>15.09.2020</END_DATE>				<!-- Дата окончания действия договора страхования : date-->
+    <BEG_DATE>{{date("d.m.Y", strtotime($data['start']))}}</BEG_DATE>				<!-- Дата начала действия договора страхования : date-->
+    <END_DATE>{{date("d.m.Y", strtotime(date("d.m.Y", strtotime($data['start'])) . " + 365 day"))}}</END_DATE>				<!-- Дата окончания действия договора страхования : date-->
     <AMOUNT>{{$data['sum']}}</AMOUNT>                                       <!-- Страховая сумма  -->
-    <PREMIUM>{{$data['prize']}}</PREMIUM>					<!-- Сумма премии -->
+    <PREMIUM>{{round($data['prize'], 2)}}</PREMIUM>					<!-- Сумма премии -->
     <CONTRACT_OPERATION_TYPE_ID>1</CONTRACT_OPERATION_TYPE_ID> 	<!-- Тип операции 1 : int -->
     <BAR_CODE/>
     <CURRENCIES>
@@ -21,22 +21,22 @@
     <INSURED>							<!-- СТРАХОВАТЕЛЬ-->
         <CLIENT xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
             <CLIENT_ID>{{$data['user']}}</CLIENT_ID>				<!-- ID клиента : string-->
-            <IIN>{{Auth::user()->iin}}</IIN>					<!-- ИИН : string-->
+            <IIN>{{$data['iin']}}</IIN>					<!-- ИИН : string-->
             <PERSON_TYPE>1</PERSON_TYPE>				<!-- 0:Юр , 1:ФизЛицо : int-->
-            <LAST_NAME>{{Auth::user()->surname}}</LAST_NAME>
-            <FIRST_NAME>{{Auth::user()->name}}</FIRST_NAME>
-            <MIDDLE_NAME>{{Auth::user()->lastname}}</MIDDLE_NAME>
-            <DOCUMENT_TYPE_ID>1 </DOCUMENT_TYPE_ID>                   	     <!-- 1:УЛ , 2 :Пасспорт : Int-->
-            <DOCUMENT_NUMBER>123456789</DOCUMENT_NUMBER>                           <!-- Номер документа    : string-->
-            <DOCUMENT_GIVED_BY>Министерство внутренних дел РК</DOCUMENT_GIVED_BY>  <!-- Кем выдан          : string-->
-            <DOCUMENT_GIVED_DATE>30.10.2014</DOCUMENT_GIVED_DATE>
-            <DOCUMENT_EXP_DATE>29.10.2024</DOCUMENT_EXP_DATE>
-            <BORN>07.02.1992</BORN>
-            <SEX>2</SEX>                                                            <!-- 1:М , 2:Ж : int-->
-            <ADDRESS>{{$data['address']}}</ADDRESS>
-            <PHONE>{{Auth::user()->phone}}</PHONE>
+            <LAST_NAME>{{$data['surname']}}</LAST_NAME>
+            <FIRST_NAME>{{$data['name']}}</FIRST_NAME>
+            <MIDDLE_NAME>{{$data['lastname']}}</MIDDLE_NAME>
+            <DOCUMENT_TYPE_ID>{{$data['doctype']}}</DOCUMENT_TYPE_ID>                   	     <!-- 1:УЛ , 2 :Пасспорт : Int-->
+            <DOCUMENT_NUMBER>{{$data['number']}}</DOCUMENT_NUMBER>                           <!-- Номер документа    : string-->
+            <DOCUMENT_GIVED_BY>{{$data['givenBy']}}</DOCUMENT_GIVED_BY>  <!-- Кем выдан          : string-->
+            <DOCUMENT_GIVED_DATE>{{date("d.m.Y", strtotime($data['givenDate']))}}</DOCUMENT_GIVED_DATE>
+            <DOCUMENT_EXP_DATE>{{date("d.m.Y", strtotime($data['givenDate']))}}</DOCUMENT_EXP_DATE>
+            <BORN>{{date('d.m.Y', strtotime(join('', [Auth::user()->iin[2],Auth::user()->iin[3],'/',Auth::user()->iin[4],Auth::user()->iin[5],'/',Auth::user()->iin[0],Auth::user()->iin[1]])))}}</BORN>
+            <SEX>{{$data['sex']}}</SEX>                                                            <!-- 1:М , 2:Ж : int-->
+            <ADDRESS>{{$data['addressFact']}}</ADDRESS>
+            <PHONE>{{$data['phone']}}</PHONE>
             <JURIDICAL_ADDRESS>{{$data['address']}}</JURIDICAL_ADDRESS>
-            <IPDL>{{($data['user']+1)}}</IPDL>							      <!--ИПДЛ 1:Нет , 2:Да : int-->
+            <IPDL>{{$data['ipdl']}}</IPDL>							      <!--ИПДЛ 1:Нет , 2:Да : int-->
             <BENEFICIAL_OWNER/>
             <FOUNDER/>
             <COUNTRY>
@@ -51,26 +51,27 @@
                 <VALUE></VALUE>
             </ECONOMICS_SECTOR>
         </CLIENT>
-    </INSURED><PAYMENT_ORDER_TYPE>                                              <!--Порядок оплат-->
+    </INSURED>
+    <PAYMENT_ORDER_TYPE>                                              <!--Порядок оплат-->
         <ID>1</ID>								      <!--int-->
         <VALUE>Единовременно</VALUE>					      <!--string-->
     </PAYMENT_ORDER_TYPE>
     <SIGNORY>   								      <!--ПОДПИСАНТ-->
         <CLIENT xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-            <CLIENT_ID>5188</CLIENT_ID>
+            <CLIENT_ID>{{$data['user']}}</CLIENT_ID>
             <ESBD_ID></ESBD_ID>
-            <IIN>777777777777</IIN>
+            <IIN>{{$data['iin']}}</IIN>
             <PERSON_TYPE>1</PERSON_TYPE>
-            <LAST_NAME>Петров</LAST_NAME>
-            <FIRST_NAME>Петр</FIRST_NAME>
-            <MIDDLE_NAME>Петрович</MIDDLE_NAME>
-            <DOCUMENT_TYPE_ID>1</DOCUMENT_TYPE_ID>
-            <DOCUMENT_NUMBER>888888888</DOCUMENT_NUMBER>
-            <DOCUMENT_GIVED_BY>МВД РЕСПУБЛИКИ КАЗАХСТАН</DOCUMENT_GIVED_BY>
-            <DOCUMENT_GIVED_DATE>28.09.2011</DOCUMENT_GIVED_DATE>
-            <DOCUMENT_EXP_DATE>25.09.2021</DOCUMENT_EXP_DATE>
-            <BORN>10.09.1985</BORN>
-            <SEX>1</SEX>
+            <LAST_NAME>{{$data['surname']}}</LAST_NAME>
+            <FIRST_NAME>{{$data['name']}}</FIRST_NAME>
+            <MIDDLE_NAME>{{$data['lastname']}}</MIDDLE_NAME>
+            <DOCUMENT_TYPE_ID>{{$data['doctype']}}</DOCUMENT_TYPE_ID>                   	     <!-- 1:УЛ , 2 :Пасспорт : Int-->
+            <DOCUMENT_NUMBER>{{$data['number']}}</DOCUMENT_NUMBER>                           <!-- Номер документа    : string-->
+            <DOCUMENT_GIVED_BY>{{$data['givenBy']}}</DOCUMENT_GIVED_BY>  <!-- Кем выдан          : string-->
+            <DOCUMENT_GIVED_DATE>{{date("d.m.Y", strtotime($data['givenDate']))}}</DOCUMENT_GIVED_DATE>
+            <DOCUMENT_EXP_DATE>{{date("d.m.Y", strtotime($data['givenDate']))}}</DOCUMENT_EXP_DATE>
+            <BORN>{{date('d.m.Y', strtotime(join('', [Auth::user()->iin[2],Auth::user()->iin[3],'/',Auth::user()->iin[4],Auth::user()->iin[5],'/',Auth::user()->iin[0],Auth::user()->iin[1]])))}}</BORN>
+            <SEX>{{$data['sex']}}</SEX>
             <BENEFICIAL_OWNER/>
             <FOUNDER/>
             <COUNTRY>
@@ -109,7 +110,7 @@
         </PAYMENT>
     </SCHEDULED_PAYMENTS>
     <VUE_POINT>
-        <VALUE>Восточно-Казахстанская область</VALUE>                      <!--Место заключения договора :string-->
+        <VALUE>Южно-Казахстанская область</VALUE>                      <!--Место заключения договора :string-->
     </VUE_POINT>
     <OBJECT_PLACE>
         <ID>7</ID>							       <!--Место объекта страхования : int-->
@@ -121,22 +122,22 @@
             <COUNTER>1</COUNTER>					       <!--Количество выгодоприобретателей :int-->
             <VALUE>
                 <CLIENT xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-                    <CLIENT_ID>{{Auth::id()}}</CLIENT_ID>
-                    <IIN>{{$data['iin']}}</IIN>
-                    <PERSON_TYPE>1</PERSON_TYPE>
-                    <LAST_NAME>Иванова</LAST_NAME>
-                    <FIRST_NAME>Маша</FIRST_NAME>
-                    <MIDDLE_NAME>Ивановна</MIDDLE_NAME>
-                    <DOCUMENT_TYPE_ID>1 </DOCUMENT_TYPE_ID>
-                    <DOCUMENT_NUMBER>123456789</DOCUMENT_NUMBER>
-                    <DOCUMENT_GIVED_BY>Министерство внутренних дел РК</DOCUMENT_GIVED_BY>
-                    <DOCUMENT_GIVED_DATE>30.10.2014</DOCUMENT_GIVED_DATE>
-                    <DOCUMENT_EXP_DATE>29.10.2024</DOCUMENT_EXP_DATE>
-                    <BORN>07.02.1992</BORN>
-                    <SEX>2</SEX>
-                    <ADDRESS>Улица Петрова,  Дом 1111 кв 1111. </ADDRESS>
-                    <PHONE>7771234567</PHONE>
-                    <JURIDICAL_ADDRESS>Улица Петрова,  Дом 1111,  кв 1111. </JURIDICAL_ADDRESS>
+                    <CLIENT_ID>{{$data['user']}}</CLIENT_ID>				<!-- ID клиента : string-->
+                    <IIN>{{$data['iin']}}</IIN>					<!-- ИИН : string-->
+                    <PERSON_TYPE>1</PERSON_TYPE>				<!-- 0:Юр , 1:ФизЛицо : int-->
+                    <LAST_NAME>{{$data['surname']}}</LAST_NAME>
+                    <FIRST_NAME>{{$data['name']}}</FIRST_NAME>
+                    <MIDDLE_NAME>{{$data['lastname']}}</MIDDLE_NAME>
+                    <DOCUMENT_TYPE_ID>{{$data['doctype']}}</DOCUMENT_TYPE_ID>                   	     <!-- 1:УЛ , 2 :Пасспорт : Int-->
+                    <DOCUMENT_NUMBER>{{$data['number']}}</DOCUMENT_NUMBER>                           <!-- Номер документа    : string-->
+                    <DOCUMENT_GIVED_BY>{{$data['givenBy']}}</DOCUMENT_GIVED_BY>  <!-- Кем выдан          : string-->
+                    <DOCUMENT_GIVED_DATE>{{date("d.m.Y", strtotime($data['givenDate']))}}</DOCUMENT_GIVED_DATE>
+                    <DOCUMENT_EXP_DATE>{{date("d.m.Y", strtotime($data['givenDate']))}}</DOCUMENT_EXP_DATE>
+                    <BORN>{{date('d.m.Y', strtotime(join('', [Auth::user()->iin[2],Auth::user()->iin[3],'/',Auth::user()->iin[4],Auth::user()->iin[5],'/',Auth::user()->iin[0],Auth::user()->iin[1]])))}}</BORN>
+                    <SEX>{{$data['sex']}}</SEX>
+                    <ADDRESS>{{$data['addressFact']}}</ADDRESS>
+                    <PHONE>{{$data['phone']}}</PHONE>
+                    <JURIDICAL_ADDRESS>{{$data['address']}}</JURIDICAL_ADDRESS>
                     <IPDL>1</IPDL>
                     <BENEFICIAL_OWNER/>
                     <FOUNDER/>
@@ -158,23 +159,23 @@
     <INSURED_PERSON_LIST>
         <INSURED_PERSON>                               <!--ЗАСТРАХОВАННЫЕ-->
             <CLIENT xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-                <CLIENT_ID>5767627</CLIENT_ID>
+                <CLIENT_ID>{{$data['user']}}</CLIENT_ID>
                 <IIN>{{$data['iin']}}</IIN>
                 <PERSON_TYPE>1</PERSON_TYPE>
-                <LAST_NAME>Иванова</LAST_NAME>
-                <FIRST_NAME>Маша</FIRST_NAME>
-                <MIDDLE_NAME>Ивановна</MIDDLE_NAME>
-                <DOCUMENT_TYPE_ID>1 </DOCUMENT_TYPE_ID>
-                <DOCUMENT_NUMBER>123456789</DOCUMENT_NUMBER>
-                <DOCUMENT_GIVED_BY>Министерство внутренних дел РК</DOCUMENT_GIVED_BY>
-                <DOCUMENT_GIVED_DATE>30.10.2014</DOCUMENT_GIVED_DATE>
-                <DOCUMENT_EXP_DATE>29.10.2024</DOCUMENT_EXP_DATE>
-                <BORN>07.02.1992</BORN>
-                <SEX>2</SEX>
-                <ADDRESS>Улица Петрова,  Дом 1111,  кв.1111 </ADDRESS>
-                <PHONE>7771234567</PHONE>
-                <JURIDICAL_ADDRESS>Улица Петрова 1111,  кв.1111 </JURIDICAL_ADDRESS>
-                <IPDL>1</IPDL>
+                <LAST_NAME>{{$data['surname']}}</LAST_NAME>
+                <FIRST_NAME>{{$data['name']}}</FIRST_NAME>
+                <MIDDLE_NAME>{{$data['lastname']}}</MIDDLE_NAME>
+                <DOCUMENT_TYPE_ID>{{$data['doctype']}}</DOCUMENT_TYPE_ID>                   	     <!-- 1:УЛ , 2 :Пасспорт : Int-->
+                <DOCUMENT_NUMBER>{{$data['number']}}</DOCUMENT_NUMBER>                           <!-- Номер документа    : string-->
+                <DOCUMENT_GIVED_BY>{{$data['givenBy']}}</DOCUMENT_GIVED_BY>  <!-- Кем выдан          : string-->
+                <DOCUMENT_GIVED_DATE>{{date("d.m.Y", strtotime($data['givenDate']))}}</DOCUMENT_GIVED_DATE>
+                <DOCUMENT_EXP_DATE>{{date("d.m.Y", strtotime($data['givenDate']))}}</DOCUMENT_EXP_DATE>
+                <BORN>{{date('d.m.Y', strtotime(join('', [Auth::user()->iin[2],Auth::user()->iin[3],'/',Auth::user()->iin[4],Auth::user()->iin[5],'/',Auth::user()->iin[0],Auth::user()->iin[1]])))}}</BORN>
+                <SEX>{{$data['sex']}}</SEX>
+                <ADDRESS>{{$data['addressFact']}}</ADDRESS>
+                <PHONE>{{$data['phone']}}</PHONE>
+                <JURIDICAL_ADDRESS>{{$data['addressFact']}}</JURIDICAL_ADDRESS>
+                <IPDL>{{($data['ipdl'])}}</IPDL>
                 <BENEFICIAL_OWNER/>
                 <FOUNDER/>
                 <COUNTRY>

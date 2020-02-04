@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Repositories\Contract\ContractRepositoryEloquent;
+use Illuminate\Support\Facades\Auth;
 
 class InsuranceController extends Controller
 {
@@ -15,9 +16,8 @@ class InsuranceController extends Controller
     }
 
     public function list() {
-        $contractRepositoryEloquent = $this->contractRepositoryEloquent;
-        // $contractRepositoryEloquent 
-        return view('user.insurance.myInsurance');
+        $contractRepositoryEloquent = $this->contractRepositoryEloquent->contract::where('user', Auth::id())->get();
+        return view('user.insurance.myInsurance', ['data' => $contractRepositoryEloquent]);
     }
 
     public function life() {

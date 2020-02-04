@@ -8,6 +8,7 @@
             <input type="hidden" id="insurance-prize" value="">
             <input type="hidden" id="insurance-sum" value="">
             <input type="hidden" id="insurance-prize" value="">
+            <input type="hidden" id="insurance-sex" value="">
             <div class="product__img product__img__modal" id="profile-img"></div>
             <div class="modal-header border-0">
                 <h6 class="modal-title">Заполнение анкеты</h6>
@@ -23,18 +24,73 @@
                 </p>
                 <table class="table table-bordered mb-0">
                     <tr class="form-tr-title table-primary">
-                        <td scope="row">1. Страхователь (Застрахованный):</td>
+                        <td scope="row">1. Заявитель:</td>
                     </tr>
                     <tr class="form-tr">
-                        <td scope="row">Ф.И.О.</td>
+                        <td scope="row">Фамилия</td>
                         <td>
-                            <input type="text" class="form-control form-input" id="profile-fullName" value="{{Auth::user()->surname}} {{Auth::user()->name}} {{Auth::user()->lastname}}">
+                            <input type="text" class="form-control form-input" id="profile-surname" value="{{Auth::user()->surname}}">
+                        </td>
+                    </tr>
+                    <tr class="form-tr">
+                        <td scope="row">Имя</td>
+                        <td>
+                            <input type="text" class="form-control form-input" id="profile-name" value="{{Auth::user()->name}}">
+                        </td>
+                    </tr>
+                    <tr class="form-tr">
+                        <td scope="row">Отчество</td>
+                        <td>
+                            <input type="text" class="form-control form-input" id="profile-lastname" value="{{Auth::user()->lastname}}">
                         </td>
                     </tr>
                     <tr class="form-tr">
                         <td scope="row">ИИН</td>
                         <td>
                             <input type="text" class="form-control form-input" id="profile-iin" value="{{Auth::user()->iin}}">
+                        </td>
+                    </tr>
+                    <tr class="form-tr">
+                        <td scope="row">Тип документа</td>
+                        <td>
+                            <div onselectstart="return false;">
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" class="custom-control-input" id="profile-docType" name="docType" value="2">
+                                    <label class="custom-control-label" for="profile-ipdl">
+                                        <span class="radio-title">Паспорт</span>
+                                    </label>
+                                </div>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" checked class="custom-control-input" id="profile-docType-2" name="docType" value="1">
+                                    <label class="custom-control-label" for="profile-docType-2">
+                                        <span class="radio-title">Удостоверение личности</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr class="form-tr">
+                        <td scope="row">Номер документа, удостоверяющего личность.</td>
+                        <td>
+                            <input type="text" class="form-control form-input" id="profile-number" value="">
+                        </td>
+                    </tr>
+                    <tr class="form-tr">
+                        <td scope="row">Кем выдан</td>
+                        <td>
+                            <input type="text" class="form-control form-input" id="profile-givenBy" value="">
+                        </td>
+                    </tr>
+                    <tr class="form-tr">
+                        <td scope="row">Дата выдачи документа.</td>
+                        <td>
+                            <input type="text" class="form-control form-input" id="profile-givenDate" value="{{date('d.m.Y')}}">
+                        </td>
+                    </tr>
+                    <tr class="form-tr">
+                        <td scope="row">Действителен до.</td>
+                        <td>
+                            <input type="text" class="form-control form-input" id="profile-ExpirationDate" value="{{date('d.m.Y')}}">
                         </td>
                     </tr>
                     <tr class="form-tr">
@@ -70,24 +126,18 @@
                         <td>
                             <div onselectstart="return false;">
                                 <div class="custom-control custom-radio custom-control-inline">
-                                    <input type="radio" class="custom-control-input" id="profile-ipdl" name="ipdl" value="1">
+                                    <input type="radio" class="custom-control-input" id="profile-ipdl" name="ipdl" value="2">
                                     <label class="custom-control-label" for="profile-ipdl">
                                         <span class="radio-title">Да</span>
                                     </label>
                                 </div>
                                 <div class="custom-control custom-radio custom-control-inline">
-                                    <input type="radio" checked class="custom-control-input" id="profile-ipdl-2" name="ipdl" value="0">
+                                    <input type="radio" checked class="custom-control-input" id="profile-ipdl-2" name="ipdl" value="1">
                                     <label class="custom-control-label" for="profile-ipdl-2">
                                         <span class="radio-title">Нет</span>
                                     </label>
                                 </div>
                             </div>
-                        </td>
-                    </tr>
-                    <tr class="form-tr">
-                        <td scope="row">Паспорт/Удостоверение личности (№, кем и когда выдан, дата окончания документа)</td>
-                        <td>
-                            <textarea class="form-control form-textarea" rows="3" id="profile-passport"></textarea>
                         </td>
                     </tr>
                     <tr class="form-tr">

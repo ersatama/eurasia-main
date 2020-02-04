@@ -36,57 +36,72 @@ class HomeController extends Controller
     }
 
     public function store(Request $request) {
-        $data = $request->all();
-        $id = Contract::create([
-            'user' => Auth::id(),
-            'name' => $data['fullName'],
-            'iin' => $data['iin'],
-            'type' => $data['type'],
-            'start' => date('Y-m-d', strtotime($data['start'])),
-            'year' => $data['year'],
-            'birth' => date('Y-m-d', strtotime($data['birth'])),
-            'sum' => $data['sum'],
-            'prize' => $data['prize'],
-            'residence' => $data['residence'],
-            'country'=> $data['country'],
-            'ipdl' => $data['ipdl'],
-            'passport' => $data['passport'],
-            'address' => $data['address'],
-            'addressFact' => $data['addressFact'],
-            'phone' => $data['phone'],
-            'email' => $data['email'],
-            'aim' => $data['aim']
-        ])->id;
+        try {
+            $data = $request->all();
+            $id = Contract::create([
+                'user' => Auth::id(),
+                'type' => $data['type'],
+                'year' => $data['year'],
+                'start' => date('Y-m-d', strtotime($data['start'])),
+                'birth' => date('Y-m-d', strtotime($data['birth'])),
+                'sum' => $data['sum'],
+                'prize' => $data['prize'],
+                'sex' => $data['sex'],
+                'surname' => $data['surname'],
+                'name' => $data['name'],
+                'lastname' => $data['lastname'],
+                'iin' => $data['iin'],
+                'doctype' => $data['doctype'],
+                'number' => $data['number'],
+                'givenBy' => $data['givenby'],
+                'givenDate' => date('Y-m-d', strtotime($data['givendate'])),
+                'expirationDate' => date('Y-m-d', strtotime($data['expirationdate'])),
+                'residence' => $data['residence'],
+                'country'=> $data['country'],
+                'ipdl' => $data['ipdl'],
+                'address' => $data['address'],
+                'addressFact' => $data['addressFact'],
+                'phone' => $data['phone'],
+                'email' => $data['email'],
+                'aim' => $data['aim']
+            ])->id;
+            return $this->soap->start([
+                'ID' => $id,
+                'OperationType' => 'новый договор',
+                'InsuranceProduct' => 'NSL_EB',
+                'Insured' => $data['iin'],
+                'Middleman' => $data['iin'],
+                'PreviousID' => ($id - 1),
+                'user' => Auth::id(),
+                'type' => $data['type'],
+                'year' => $data['year'],
+                'start' => date('Y-m-d', strtotime($data['start'])),
+                'birth' => date('Y-m-d', strtotime($data['birth'])),
+                'sum' => $data['sum'],
+                'prize' => $data['prize'],
+                'sex' => $data['sex'],
+                'surname' => $data['surname'],
+                'name' => $data['name'],
+                'lastname' => $data['lastname'],
+                'iin' => $data['iin'],
+                'doctype' => $data['doctype'],
+                'number' => $data['number'],
+                'givenBy' => $data['givenby'],
+                'givenDate' => date('Y-m-d', strtotime($data['givendate'])),
+                'expirationDate' => date('Y-m-d', strtotime($data['expirationdate'])),
+                'residence' => $data['residence'],
+                'country'=> $data['country'],
+                'ipdl' => $data['ipdl'],
+                'address' => $data['address'],
+                'addressFact' => $data['addressFact'],
+                'phone' => $data['phone'],
+                'email' => $data['email'],
+                'aim' => $data['aim']
+            ]);
 
-        $this->soap->start([
-            'ID' => $id,
-            'OperationType' => 'новый договор',
-            'InsuranceProduct' => 'NSL_EB',
-            'Insured' => $data['iin'],
-            'Middleman' => $data['iin'],
-            'PreviousID' => ($id - 1),
-            'InsuredName' => $data['fullName'],
-            'user' => Auth::id(),
-            'name' => $data['fullName'],
-            'iin' => $data['iin'],
-            'type' => $data['type'],
-            'start' => date('Y-m-d', strtotime($data['start'])),
-            'year' => $data['year'],
-            'birth' => date('Y-m-d', strtotime($data['birth'])),
-            'sum' => $data['sum'],
-            'prize' => $data['prize'],
-            'residence' => $data['residence'],
-            'country'=> $data['country'],
-            'ipdl' => $data['ipdl'],
-            'passport' => $data['passport'],
-            'address' => $data['address'],
-            'addressFact' => $data['addressFact'],
-            'phone' => $data['phone'],
-            'email' => $data['email'],
-            'aim' => $data['aim']
-        ]);
 
-        return json_encode($request->all());
-
+        } catch (\Exception $e) {
+            return response()->json(['status' => $e->getMessage()],405);
+        }
     }
 }
